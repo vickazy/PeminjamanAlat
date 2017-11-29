@@ -1,6 +1,6 @@
 <?php
-// Proteksi halaman
-$this->simple_login->cek_login();
+	// Proteksi halaman
+	$this->simple_login->cek_login();
 ?>
 
 <!DOCTYPE html>
