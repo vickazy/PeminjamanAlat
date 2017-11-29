@@ -9,7 +9,12 @@ class Login extends CI_Controller {
 	}
 
 	public function index() {
-		$this->load->view('v_login');
+		$session  	= $this->session->userdata('username');
+		if($session == '') {
+			$this->load->view('v_login');
+		} else {
+			redirect(base_url());
+		}
 	}
 
 	function aksi_login() {

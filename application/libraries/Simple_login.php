@@ -38,11 +38,13 @@ class Simple_login {
 
 	// Fungsi logout
 	public function logout() {
-		$this->CI->session->unset_userdata('username');
-		$this->CI->session->unset_userdata('id_login');
-		$this->CI->session->unset_userdata('id');
-		$this->CI->session->unset_userdata('nama_petugas');
+		//$this->CI->session->unset_userdata('username');
+		//$this->CI->session->unset_userdata('id_login');
+		//$this->CI->session->unset_userdata('id');
+		//$this->CI->session->unset_userdata('nama_petugas');
 		//$this->CI->session->set_flashdata('sukses','Anda berhasil logout');
+
+		$this->CI->session->sess_destroy();
 		redirect(base_url('login'));
 	}
 }
