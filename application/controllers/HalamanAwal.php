@@ -9,7 +9,7 @@ class HalamanAwal extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('v_halamanAwal');
+		$this->load->view('blank');
 	}
 	
 }
