@@ -33,24 +33,6 @@ INSERT INTO `alat` VALUES ('ALT0001', 'Wacom Bamboo', '10');
 INSERT INTO `alat` VALUES ('ALT0002', 'Kamera DSLR', '2');
 
 -- ----------------------------
--- Table structure for detail_peminjam
--- ----------------------------
-DROP TABLE IF EXISTS `detail_peminjam`;
-CREATE TABLE `detail_peminjam` (
-  `id_detail` varchar(20) NOT NULL,
-  `id_peminjam` varchar(20) NOT NULL,
-  `id_alat` varchar(20) NOT NULL,
-  KEY `id_peminjam` (`id_peminjam`),
-  KEY `id_alat` (`id_alat`),
-  CONSTRAINT `id_alat` FOREIGN KEY (`id_alat`) REFERENCES `alat` (`id_alat`),
-  CONSTRAINT `id_peminjam` FOREIGN KEY (`id_peminjam`) REFERENCES `peminjam` (`id_peminjam`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of detail_peminjam
--- ----------------------------
-
--- ----------------------------
 -- Table structure for kelas
 -- ----------------------------
 DROP TABLE IF EXISTS `kelas`;
@@ -102,6 +84,25 @@ CREATE TABLE `login` (
 INSERT INTO `login` VALUES ('ridhansholeh', 'cmlkaGFucw==', '2017-11-02');
 
 -- ----------------------------
+-- Table structure for petugas
+-- ----------------------------
+DROP TABLE IF EXISTS `petugas`;
+CREATE TABLE `petugas` (
+  `id_petugas` varchar(20) NOT NULL,
+  `nama_petugas` varchar(50) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `jabatan` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_petugas`),
+  KEY `username` (`username`),
+  CONSTRAINT `username` FOREIGN KEY (`username`) REFERENCES `login` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of petugas
+-- ----------------------------
+INSERT INTO `petugas` VALUES ('PTG00001', 'Ridhan Sholeh', 'ridhansholeh', 'Admin');
+
+-- ----------------------------
 -- Table structure for peminjam
 -- ----------------------------
 DROP TABLE IF EXISTS `peminjam`;
@@ -130,20 +131,19 @@ CREATE TABLE `peminjam` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for petugas
+-- Table structure for detail_peminjam
 -- ----------------------------
-DROP TABLE IF EXISTS `petugas`;
-CREATE TABLE `petugas` (
-  `id_petugas` varchar(20) NOT NULL,
-  `nama_petugas` varchar(50) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `jabatan` varchar(30) NOT NULL,
-  PRIMARY KEY (`id_petugas`),
-  KEY `username` (`username`),
-  CONSTRAINT `username` FOREIGN KEY (`username`) REFERENCES `login` (`username`)
+DROP TABLE IF EXISTS `detail_peminjam`;
+CREATE TABLE `detail_peminjam` (
+  `id_detail` varchar(20) NOT NULL,
+  `id_peminjam` varchar(20) NOT NULL,
+  `id_alat` varchar(20) NOT NULL,
+  KEY `id_peminjam` (`id_peminjam`),
+  KEY `id_alat` (`id_alat`),
+  CONSTRAINT `id_alat` FOREIGN KEY (`id_alat`) REFERENCES `alat` (`id_alat`),
+  CONSTRAINT `id_peminjam` FOREIGN KEY (`id_peminjam`) REFERENCES `peminjam` (`id_peminjam`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of petugas
+-- Records of detail_peminjam
 -- ----------------------------
-INSERT INTO `petugas` VALUES ('PTG00001', 'Ridhan Sholeh', 'ridhansholeh', 'Admin');
