@@ -11,10 +11,9 @@ class HalamanAwal extends CI_Controller {
 	
 	public function index(){
 		$data = array(
-			'title'	=> ""
-		);
+			'title' => 'Halaman '. $this->session->userdata("jabatan"));
 
-		$this->layouts->utama('master/alat/AlatView', $data);
+		$this->layouts->utama('dashboard', $data);
 	}
 	
 }

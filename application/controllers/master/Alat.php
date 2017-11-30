@@ -6,11 +6,14 @@ class Alat extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->simple_login->cek_login(); // Proteksi halaman
+		$this->load->library('Layouts');
 	}
 	
-	public function index()
-	{
-		$this->load->view('master/Alat/AlatView');
+	public function index(){
+		$data = array(
+			'title' => 'Data Alat');
+
+		$this->layouts->utama('master/Alat/AlatView', $data);
 	}
 	
 }
