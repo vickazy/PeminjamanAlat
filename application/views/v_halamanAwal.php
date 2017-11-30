@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title>Halaman <?php echo $this->session->userdata("jabatan"); ?></title>
+	<title><?php echo $title; ?></title>
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i" rel="stylesheet">
@@ -47,13 +47,7 @@
 	<main>
 		<div class="main-content">
 
-			<div class="card">
-				<h4 class="card-title">Halaman Utama</h4>
-
-				<div class="card-body">
-					<?php echo $contentnya; ?>
-				</div>
-			</div>
+			<?php echo $contentnya; ?>
 
 		</div><!--/.main-content -->
 

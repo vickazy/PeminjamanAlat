@@ -9,14 +9,14 @@
 		<nav class="sidebar-navigation">
 			<ul class="menu">
 				<li class="menu-category">Master Admin</li>
-				<li class="menu-item active">
+				<li class="menu-item <?php if($this->uri->segment(1)==""){echo "active";} ?>">
 					<a class="menu-link" href="<?php echo base_url(); ?>">
 						<span class="title">Halaman Utama</span>
 						<i class="material-icons">home</i>
 					</a>
 				</li>
-				<li class="menu-item">
-					<a class="menu-link" href="#">
+				<li class="menu-item <?php if($this->uri->segment(2)=="Alat"){echo "active";} ?>">
+					<a class="menu-link" href="<?php echo base_url('master/Alat'); ?>">
 						<span class="title">Data Alat</span>
 						<i class="material-icons">build</i>
 					</a>

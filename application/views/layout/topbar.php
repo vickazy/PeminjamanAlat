@@ -14,7 +14,7 @@
 			<ul class="topbar-btns">
 
 				<li class="dropdown">
-					<span class="topbar-btn" data-toggle="dropdown"><img class="avatar" src="assets/img/avatar/default.jpg" alt="..."></span>
+					<span class="topbar-btn" data-toggle="dropdown"><img class="avatar" src="<?php echo base_url(); ?>assets/img/avatar/default.jpg" alt="..."></span>
 					<div class="dropdown-menu dropdown-menu-right">
 						<p class="dropdown-item">Hai, <?php echo $this->session->userdata("nama_petugas"); ?></p>
 						<div class="dropdown-divider"></div>
