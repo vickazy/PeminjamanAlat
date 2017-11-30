@@ -10,7 +10,11 @@ class HalamanAwal extends CI_Controller {
 	}
 	
 	public function index(){
-		$this->layouts->utama('master/alat/AlatView');
+		$data = array(
+			'title'	=> ""
+		);
+
+		$this->layouts->utama('master/alat/AlatView', $data);
 	}
 	
 }
