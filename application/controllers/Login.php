@@ -28,8 +28,6 @@ class Login extends CI_Controller {
 		if($valid->run()) {
 			$this->simple_login->login($username,$password, base_url(''), base_url('login'));
 		}
-		// End fungsi login
-		$data = array(	'title'	=> 'Halaman Login Administrator');
 	}
  
 	function logout() {

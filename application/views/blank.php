@@ -9,7 +9,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title>Blank</title>
+	<title>Halaman <?php echo $this->session->userdata("jabatan"); ?></title>
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i" rel="stylesheet">
@@ -35,7 +35,13 @@
 	</div>
 
 	<!-- Sidebar -->
-		<?php $this->load->view('Layout/sidebar'); ?>
+		<?php
+			if ($this->session->userdata("jabatan") == "Admin") {
+				$this->load->view("Layout/menuAdmin");
+			} else {
+				$this->load->view("Layout/menuPetugas");
+			}
+		?>
 	<!-- END Sidebar -->
 
 	<!-- Topbar -->
