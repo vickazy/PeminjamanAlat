@@ -13,7 +13,7 @@ class Alat extends CI_Controller {
 	
 	public function index(){
 		$data = array(
-			'title' => 'Data Alat',
+			'title' => 'Data Alat | Halaman '.$this->session->userdata('jabatan'),
 			'alat'	=> $this->AlatModel->read()->result()
 		);
 
@@ -22,7 +22,7 @@ class Alat extends CI_Controller {
 
 	public function tambah(){
 		$data = array(
-			'title' => 'Tambah Alat',
+			'title' => 'Tambah Alat | Halaman '.$this->session->userdata('jabatan'),
 			'kode'	=> $this->AlatModel->auto()
 		);
 
@@ -38,7 +38,7 @@ class Alat extends CI_Controller {
 		$where = array('id_alat' => $id_alat);
 		$data = array(
 			'alat' 	=> $this->AlatModel->edit($where, 'alat')->result(),
-			'title'	=> 'Ubah Data Alat'
+			'title'	=> 'Ubah Data Alat | Halaman '.$this->session->userdata('jabatan')
 		);
 
 		$this->layouts->utama('master/Alat/AlatEdit', $data);

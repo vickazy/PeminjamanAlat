@@ -62,19 +62,29 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 
-			$(document).on('click', '#delete', function(e){
+			$(document).on('click', '#delAlat', function(e){
 				var id_alat = $(this).data('id');
-				SwalDelete(id_alat);
+				var urlAlat = '<?php echo base_url('master/Alat/hapus/'); ?>';
+
+				SwalDelete(id_alat, urlAlat);
+				e.preventDefault();
+			});
+
+			$(document).on('click', '#delKelas', function(e){
+				var id_kelas = $(this).data('id');
+				var urlKelas = '<?php echo base_url('master/Kelas/hapus/'); ?>';
+
+				SwalDelete(id_kelas, urlKelas);
 				e.preventDefault();
 			});
 
 		});
 
-		function SwalDelete(id_alat){
+		function SwalDelete(id, url){
 
 			swal({
 				title: 'Apakah Kamu Yakin?',
-				text: "Akan Terhapus Secara Permanen!",
+				text: "Data Akan Terhapus Secara Permanen!",
 				type: 'warning',
 				showCancelButton: true,
 				confirmButtonColor: '#3085d6',
@@ -87,7 +97,7 @@
 					return new Promise(function(resolve) {
 
 						$.ajax({
-							url: '<?php echo base_url('master/Alat/hapus/'); ?>'+id_alat,
+							url: url+id,
 							dataType: 'json'
 						})
 						.done(function(response){

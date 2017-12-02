@@ -21,8 +21,8 @@
 						<i class="material-icons">build</i>
 					</a>
 				</li>
-				<li class="menu-item">
-					<a class="menu-link" href="#">
+				<li class="menu-item <?php if($this->uri->segment(2)=="Kelas"){echo "active";} ?>">
+					<a class="menu-link" href="<?php echo base_url('master/Kelas'); ?>">
 						<span class="title">Data Kelas</span>
 						<i class="material-icons">store</i>
 					</a>

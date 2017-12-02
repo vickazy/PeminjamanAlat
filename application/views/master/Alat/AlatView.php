@@ -45,7 +45,7 @@
 								<td><?php echo $u->stok ?></td>
 								<td>
 									<a href="<?php echo base_url('master/Alat/edit/').$u->id_alat; ?>" class="btn btn-float btn-sm btn-primary"><i class="ti-pencil"></i></a>&nbsp;&nbsp;&nbsp;
-									<button id="delete" class="btn btn-float btn-sm btn-danger" data-id="<?php echo $u->id_alat ?>"><i class="ti-close"></i></button>
+									<button id="delAlat" class="btn btn-float btn-sm btn-danger" data-id="<?php echo $u->id_alat ?>"><i class="ti-close"></i></button>
 								</td>
 							</tr>
 							<?php } ?>
