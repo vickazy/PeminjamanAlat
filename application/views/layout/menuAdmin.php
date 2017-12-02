@@ -33,8 +33,8 @@
 						<i class="material-icons">help_outline</i>
 					</a>
 				</li>
-				<li class="menu-item">
-					<a class="menu-link" href="#">
+				<li class="menu-item <?php if($this->uri->segment(2)=="Petugas"){echo "active";} ?>">
+					<a class="menu-link" href="<?php echo base_url('master/Petugas'); ?>">
 						<span class="title">Data Petugas</span>
 						<i class="material-icons">people</i>
 					</a>
