@@ -28,8 +28,8 @@
 						</thead>
 						<tfoot>
 							<tr>
-								<th>ID Alat</th>
-								<th>Nama Alat</th>
+								<th>ID Kelas</th>
+								<th>Nama Kelas</th>
 								<th>Action</th>
 							</tr>
 						</tfoot>

@@ -27,8 +27,8 @@
 						<i class="material-icons">store</i>
 					</a>
 				</li>
-				<li class="menu-item">
-					<a class="menu-link" href="#">
+				<li class="menu-item <?php if($this->uri->segment(2)=="Keperluan"){echo "active";} ?>">
+					<a class="menu-link" href="<?php echo base_url('master/Keperluan'); ?>">
 						<span class="title">Data Keperluan</span>
 						<i class="material-icons">help_outline</i>
 					</a>

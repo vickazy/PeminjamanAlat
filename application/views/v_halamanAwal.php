@@ -78,6 +78,14 @@
 				e.preventDefault();
 			});
 
+			$(document).on('click', '#delPerlu', function(e){
+				var id_keperluan = $(this).data('id');
+				var urlKeperluan = '<?php echo base_url('master/Keperluan/hapus/'); ?>';
+
+				SwalDelete(id_keperluan, urlKeperluan);
+				e.preventDefault();
+			});
+
 		});
 
 		function SwalDelete(id, url){
