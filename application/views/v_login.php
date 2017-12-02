@@ -68,7 +68,7 @@
 		</div>
 
 		<footer class="col-12 align-self-end text-center fs-13">
-			<p class="mb-0"><small>Copyright © 2017 <a href="http://thetheme.io/theadmin">TheAdmin</a>. All rights reserved.</small></p>
+			<p class="mb-0"><small>Copyright © <?php echo date("Y"); ?> <a href="<?php echo base_url(); ?>">Animasi SMKN 2 Cimahi</a>. All rights reserved.</small></p>
 		</footer>
 	</div>
 

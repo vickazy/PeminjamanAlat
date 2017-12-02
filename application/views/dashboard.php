@@ -1,3 +1,4 @@
+		<div class="main-content">
 			<div class="card">
 				<h4 class="card-title">Halaman Utama <?php echo $this->session->userdata('jabatan') ?></h4>
 
@@ -5,3 +6,4 @@
 					
 				</div>
 			</div>
+		</div>

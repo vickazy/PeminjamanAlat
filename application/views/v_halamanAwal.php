@@ -45,11 +45,8 @@
 
 	<!-- Main container -->
 	<main>
-		<div class="main-content">
-
-			<?php echo $contentnya; ?>
-
-		</div><!--/.main-content -->
+		<?php echo $contentnya; ?>
+	<!--/.main-content -->
 
 		<!-- Footer -->
 			<?php echo $footernya; ?>
@@ -58,9 +55,61 @@
 	<!-- END Main container -->
 
     <!-- Scripts -->
-	<script src="<?php echo base_url('assets/js/core.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/js/core.min.js'); ?>" data-provide="sweetalert"></script>
 	<script src="<?php echo base_url('assets/js/app.min.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/script.min.js'); ?>"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$(document).on('click', '#delete', function(e){
+				var id_alat = $(this).data('id');
+				SwalDelete(id_alat);
+				e.preventDefault();
+			});
+
+		});
+
+		function SwalDelete(id_alat){
+
+			swal({
+				title: 'Apakah Kamu Yakin?',
+				text: "Akan Terhapus Secara Permanen!",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya, Hapus!',
+				cancelButtonText: 'Batal',
+				showLoaderOnConfirm: true,
+
+				preConfirm: function() {
+					return new Promise(function(resolve) {
+
+						$.ajax({
+							url: '<?php echo base_url('master/Alat/hapus/'); ?>'+id_alat,
+							dataType: 'json'
+						})
+						.done(function(response){
+							swal('Terhapus!', response.message, response.status);
+							readProducts();
+						})
+						.fail(function(){
+							swal('Oops...', 'Something went wrong with ajax !', 'error');
+						});
+					});
+				},
+				allowOutsideClick: false			  
+			});	
+
+		}
+
+		function readProducts(){
+			setTimeout(function () {
+				location.reload()
+			}, 900);
+		}
+	</script>
 
 </body>
 </html>
