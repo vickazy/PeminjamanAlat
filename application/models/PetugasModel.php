@@ -21,7 +21,7 @@ class PetugasModel extends CI_Model{
 
 		$dataLogin = array(
 			'username' => $username,
-			'password' => base64_encode($password)
+			'password' => md5($password)
 		);
 		$dataPtg = array(
 			'id_petugas' 	=> $id_petugas,

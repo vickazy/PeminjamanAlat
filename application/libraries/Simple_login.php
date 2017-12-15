@@ -10,17 +10,19 @@ class Simple_login {
 
 	// Fungsi login
 	public function login($username, $password) {
-		$query = $this->CI->db->get_where('login',array('username'=>$username,'password' => base64_encode($password)));
+		$query = $this->CI->db->get_where('login',array('username'=>$username,'password' => md5($password)));
 		if($query->num_rows() == 1) {
 			$row 	= $this->CI->db->query('SELECT * FROM petugas where username = "'.$username.'"');
 			$admin 	= $row->row();
 			$id 	= $admin->id_user;
+			$id_petugas = $admin->id_petugas;
 			$nama_petugas   = $admin->nama_petugas;
 			$jabatan = $admin->jabatan;
 
 			$this->CI->session->set_userdata('username', $username);
 			$this->CI->session->set_userdata('id_login', uniqid(rand()));
 			$this->CI->session->set_userdata('id', $id);
+			$this->CI->session->set_userdata('id_petugas', $id_petugas);
 			$this->CI->session->set_userdata('nama_petugas', $nama_petugas);
 			$this->CI->session->set_userdata('jabatan', $jabatan);
 			redirect(base_url(''));
