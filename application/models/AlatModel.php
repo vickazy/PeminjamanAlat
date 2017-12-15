@@ -14,7 +14,8 @@ class AlatModel extends CI_Model{
 		$data = array(
 			'id_alat' 	=> $id_alat,
 			'nama_alat' => $nama_alat,
-			'stok'		=> $stok
+			'stok'		=> $stok,
+			'jumlah'	=> $stok
 		);
 
 		$this->db->insert('alat', $data);

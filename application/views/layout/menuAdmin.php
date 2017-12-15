@@ -41,6 +41,14 @@
 				</li>
 
 				<li class="menu-category">Transaksi</li>
+				<li class="menu-item <?php if($this->uri->segment(2)=="#"){echo "active";} ?>">
+					<a class="menu-link" href="<?php echo base_url('transaksi/Minjam/tambah'); ?>">
+						<span class="title">Peminjaman</span>
+						<i class="material-icons">#</i>
+					</a>
+				</li>
+
+				<li class="menu-category">Laporan</li>
 				<li class="menu-item">
 					<a class="menu-link" href="#">
 						<span class="title">Data Petugas</span>
@@ -64,8 +72,6 @@
 						</li>
 					</ul>
 				</li>
-
-				<li class="menu-category">Laporan</li>
 			</ul>
 		</nav>
 	</aside>

@@ -62,6 +62,8 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 
+			detailPinjam();
+
 			$(document).on('click', '#delAlat', function(e){
 				var id_alat = $(this).data('id');
 				var urlAlat = '<?php echo base_url('master/Alat/hapus/'); ?>';
@@ -85,6 +87,46 @@
 				SwalDelete(id_keperluan, urlKeperluan);
 				e.preventDefault();
 			});
+
+			$(document).on('click', '#delDetail', function(e){
+				var id_detail = $(this).data('id');
+
+				$.ajax({
+					url: '<?php echo base_url('transaksi/Minjam/hapusDetail/'); ?>' + id_detail,
+					dataType: 'json'
+				})
+				.done(function(response){
+					detailPinjam();
+				})
+				.fail(function(){
+					swal('Oops...', 'Something went wrong with ajax !', 'error');
+				});
+				e.preventDefault();
+			});
+
+			/*$('#detail_form').submit(function(e){
+				e.preventDefault(); // Prevent Default Submission
+				
+				$.ajax({
+					url: '<?php echo base_url('transaksi/Minjam/inputDetail/'); ?>',
+					type: 'POST',
+					data: $(this).serialize() // it will serialize the form data
+				})
+				.done(function(response){
+					var id_detail = '<?php echo $id_detail; ?>';
+					var idTerakhir = id_detail.substr(id_detail.length - 1);
+					
+					var hasil = parseInt(idTerakhir)+1;
+					var hasilAkhir = 'DTL00000' + hasil;
+
+					detailPinjam();
+					$('#jumlah_detail').val('');
+					$('#id_detail').val(hasilAkhir);
+				})
+				.fail(function(){
+					alert('Ajax Submit Failed ...');	
+				});
+			});*/
 
 		});
 
@@ -126,6 +168,10 @@
 			setTimeout(function () {
 				location.reload()
 			}, 900);
+		}
+
+		function detailPinjam(){
+			$('#load-detailPinjam').load('<?php echo base_url('transaksi/Minjam/bacaDetail/'); ?>');
 		}
 	</script>
 

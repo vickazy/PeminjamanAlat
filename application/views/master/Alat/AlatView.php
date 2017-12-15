@@ -23,6 +23,7 @@
 							<tr>
 								<th>ID Alat</th>
 								<th>Nama Alat</th>
+								<th>Jumlah Dimiliki</th>
 								<th>Stok</th>
 								<th>Action</th>
 							</tr>
@@ -31,6 +32,7 @@
 							<tr>
 								<th>ID Alat</th>
 								<th>Nama Alat</th>
+								<th>Jumlah Dimiliki</th>
 								<th>Stok</th>
 								<th>Action</th>
 							</tr>
@@ -42,6 +44,7 @@
 							<tr>
 								<td><?php echo $u->id_alat ?></td>
 								<td><?php echo $u->nama_alat ?></td>
+								<td><?php echo $u->jumlah ?></td>
 								<td><?php echo $u->stok ?></td>
 								<td>
 									<a href="<?php echo base_url('master/Alat/edit/').$u->id_alat; ?>" class="btn btn-float btn-sm btn-primary"><i class="ti-pencil"></i></a>&nbsp;&nbsp;&nbsp;

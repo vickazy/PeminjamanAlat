@@ -34,7 +34,11 @@
 									</div>
 									<div class="form-group">
 										<input type="number" class="form-control" name="stok" value="<?php echo $u->stok ?>" required>
-										<label>Jumlah</label>
+										<label>Stok</label>
+									</div>
+									<div class="form-group">
+										<input type="number" class="form-control" name="stok" value="<?php echo $u->jumlah ?>" required>
+										<label>Jumlah Yang Dimiliki</label>
 									</div>
 							</div>
 
