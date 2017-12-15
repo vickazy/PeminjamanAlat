@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100122
 File Encoding         : 65001
 
-Date: 2017-12-15 19:37:35
+Date: 2017-12-15 19:37:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,6 +28,13 @@ CREATE TABLE `alat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
+-- Records of alat
+-- ----------------------------
+INSERT INTO `alat` VALUES ('ALT0001', 'Wacom Bamboo', '7', '10');
+INSERT INTO `alat` VALUES ('ALT0002', 'Kamera DSLR', '2', '2');
+INSERT INTO `alat` VALUES ('ALT0003', 'Pulpen', '5', '5');
+
+-- ----------------------------
 -- Table structure for detail_peminjam
 -- ----------------------------
 DROP TABLE IF EXISTS `detail_peminjam`;
@@ -42,6 +49,10 @@ CREATE TABLE `detail_peminjam` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
+-- Records of detail_peminjam
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for kelas
 -- ----------------------------
 DROP TABLE IF EXISTS `kelas`;
@@ -51,6 +62,16 @@ CREATE TABLE `kelas` (
   PRIMARY KEY (`nama_kelas`),
   KEY `id_kelas` (`id_kelas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of kelas
+-- ----------------------------
+INSERT INTO `kelas` VALUES ('KLS0001', '10 Animasi A');
+INSERT INTO `kelas` VALUES ('KLS0002', '10 Animasi B');
+INSERT INTO `kelas` VALUES ('KLS0003', '11 Animasi A');
+INSERT INTO `kelas` VALUES ('KLS0004', '11 Animasi B');
+INSERT INTO `kelas` VALUES ('KLS0005', '12 Animasi A');
+INSERT INTO `kelas` VALUES ('KLS0006', '12 Animasi B');
 
 -- ----------------------------
 -- Table structure for keperluan
@@ -63,6 +84,12 @@ CREATE TABLE `keperluan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
+-- Records of keperluan
+-- ----------------------------
+INSERT INTO `keperluan` VALUES ('KPL001', 'Praktik');
+INSERT INTO `keperluan` VALUES ('KPL002', 'Pribadi');
+
+-- ----------------------------
 -- Table structure for login
 -- ----------------------------
 DROP TABLE IF EXISTS `login`;
@@ -72,6 +99,13 @@ CREATE TABLE `login` (
   `last_login` text NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of login
+-- ----------------------------
+INSERT INTO `login` VALUES ('jajang', 'b56b57039c86f8626ece5a1a35f86175', '');
+INSERT INTO `login` VALUES ('ridhansholeh', 'ce741e2ff01555b58879487957d645dd', '2017-11-02');
+INSERT INTO `login` VALUES ('udin', '3af4c9341e31bce1f4262a326285170d', '');
 
 -- ----------------------------
 -- Table structure for peminjam
@@ -99,6 +133,10 @@ CREATE TABLE `peminjam` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
+-- Records of peminjam
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for pengembalian
 -- ----------------------------
 DROP TABLE IF EXISTS `pengembalian`;
@@ -110,6 +148,10 @@ CREATE TABLE `pengembalian` (
   KEY `id_peminjam 2` (`id_peminjam`),
   CONSTRAINT `id_peminjam 2` FOREIGN KEY (`id_peminjam`) REFERENCES `peminjam` (`id_peminjam`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of pengembalian
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for petugas
@@ -129,3 +171,10 @@ CREATE TABLE `petugas` (
   KEY `username` (`username`),
   CONSTRAINT `username` FOREIGN KEY (`username`) REFERENCES `login` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of petugas
+-- ----------------------------
+INSERT INTO `petugas` VALUES ('PTG0001', 'Ridhan Sholeh', 'Jl. Cihanjuang', '+62 895-2002-2712', 'L', '1999-01-21', 'Cimahi', 'ridhansholeh', 'Admin');
+INSERT INTO `petugas` VALUES ('PTG0002', 'Jajang', 'Cimahi', '+62 895-2002-2712', 'L', '1995-03-22', 'Bandung', 'jajang', 'Petugas');
+INSERT INTO `petugas` VALUES ('PTG0003', 'Udin', 'Jl Cimahi', '+62 659-8775-1211', 'L', '2017-12-12', 'Bandung', 'udin', 'Admin');
