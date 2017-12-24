@@ -6,6 +6,11 @@ class AlatModel extends CI_Model{
 		return $this->db->get('alat');
 	}
 
+	function readDetail(){
+		$this->db->where_not_in('stok', 0);
+		return $this->db->get('alat');
+	}
+
 	function tambah(){
 		$id_alat = $this->input->post('id_alat');
 		$nama_alat = $this->input->post('nama_alat');

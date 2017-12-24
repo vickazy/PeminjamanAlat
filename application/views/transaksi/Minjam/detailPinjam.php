@@ -16,7 +16,7 @@
 										<td><?php echo $no ?></td>
 										<td><?php echo $u->nama_alat ?></td>
 										<td><?php echo $u->jumlah ?></td>
-										<td><a class="btn btn-sm btn-danger" id="delDetail" data-id="<?php echo $u->id_detail; ?>" href="javascript:void(0)"><i class="material-icons">delete_forever</i></a></td>
+										<td><a class="btn btn-sm btn-danger" id="delDetail" data-id="<?php echo $u->id_detail; ?>" data-id-alat="<?php echo $u->id_alat; ?>" data-jumlah-alat="<?php echo $u->jumlah ?>" href="javascript:void(0)"><i class="material-icons">delete_forever</i></a></td>
 									</tr>
 									<?php 
 										$no++;

@@ -9,25 +9,62 @@ class MinjamModel extends CI_Model{
 		return $this->db->get('detail_peminjam');
 	}
 
-	function inputDetail(){
-		$id_detail	 = $this->input->post('id_detail');
-		$id_peminjam = $this->input->post('id_peminjam');
-		$id_alat	 = $this->input->post('id_alat');
-		$jumlah		 = $this->input->post('jumlah_detail');
+	function bacaKelas(){
+		return $this->db->get('kelas');
+	}
 
+	function bacaKeperluan(){
+		return $this->db->get('keperluan');
+	}
+
+	function inputDetail(){
 		$data = array(
-			'id_detail' => $id_detail,
-			'id_peminjam' => $id_peminjam,
-			'id_alat' => $id_alat,
-			'jumlah' => $jumlah
+			'id_detail'		=> $this->input->post('idDetail'),
+			'id_peminjam'	=> $this->input->post('id_peminjam'),
+			'id_alat'		=> $this->input->post('id_alat'),
+			'jumlah'		=> $this->input->post('jumlah_detail')
 		);
 
-		$this->db->insert('detail_peminjam', $data);
+		return $this->db->insert('detail_peminjam', $data);
 	}
 
 	function hapusDetail($where, $table){
 		$this->db->where($where);
 		$this->db->delete($table);
+
+		if($this->db->affected_rows() > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	function kurangStok(){
+		$this->db->select('alat.stok');
+		$this->db->where('id_alat', $this->input->post('id_alat'));
+		$query1 = $this->db->get('alat');
+		if($query1->num_rows() <> 0){
+			$stok = $query1->row();
+			$stokBaru = intval($stok->stok) - $this->input->post('jumlah_detail');
+		}
+
+		$data = array('stok' => $stokBaru);
+		$this->db->where('id_alat', $this->input->post('id_alat'));
+		return $this->db->update('alat', $data);
+	}
+
+	function tambahStok($where, $jumlah){
+		$this->db->select('alat.stok');
+		$this->db->where('id_alat', $where);
+		$query1 = $this->db->get('alat');
+		if($query1->num_rows() <> 0){
+			$stok = $query1->row();
+			$stokBaru = intval($stok->stok) + $jumlah;
+		}
+
+		$data = array('stok' => $stokBaru);
+		$this->db->where('id_alat', $where);
+		return $this->db->update('alat', $data);
 	}
 
 	function auto(){
@@ -63,7 +100,8 @@ class MinjamModel extends CI_Model{
 
 		$maxcode=str_pad($kode, 6, "0", STR_PAD_LEFT);
 		$viewcode="DTL".$maxcode;
-		return $viewcode;
+		$autoId = array('kode' => $viewcode);
+		return json_encode($autoId);
 	}
 
 }

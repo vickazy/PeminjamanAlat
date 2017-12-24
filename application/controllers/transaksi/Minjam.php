@@ -8,7 +8,8 @@ class Minjam extends CI_Controller {
 		$this->simple_login->cek_login(); // Proteksi halaman
 		$this->load->library('Layouts');
 		$this->load->model('MinjamModel');
-			$this->load->helper('url');
+		$this->load->model('AlatModel');
+		$this->load->helper('url');
 	}
 
 	public function index(){
@@ -19,7 +20,9 @@ class Minjam extends CI_Controller {
 		$data = array(
 			'title' 	=> 'Transaksi Minjam | Halaman '.$this->session->userdata('jabatan'),
 			'kode'		=> $this->MinjamModel->auto(),
-			'id_detail' => $this->MinjamModel->autoDetail()
+			'kelas'		=> $this->MinjamModel->bacaKelas()->result(),
+			'keperluan'	=> $this->MinjamModel->bacaKeperluan()->result(),
+			'alat'		=> $this->AlatModel->readDetail()->result()
 		);
 
 		/*if ($this->input->post('submit')) {
@@ -31,20 +34,29 @@ class Minjam extends CI_Controller {
 	}
 
 	public function inputDetail(){
-		if ($this->input->post()){
-			$this->MinjamModel->inputDetail();
+		$result1 = $this->MinjamModel->inputDetail();
+		$result2 = $this->MinjamModel->kurangStok();
+
+		$msg['success'] = false;
+
+		if($result1 && $result2){
+			$msg['success'] = true;
 		}
+
+		echo json_encode($msg);
 	}
 
-	public function hapusDetail($id_detail){
+	public function hapusDetail($id_detail, $id_alat, $jumlah){
 		$where = array('id_detail' => $id_detail);
+		$result1 = $this->MinjamModel->hapusDetail($where,'detail_peminjam');
+		$result2 = $this->MinjamModel->tambahStok($id_alat, $jumlah);
 
-		if ($this->MinjamModel->hapusDetail($where,'detail_peminjam')) {
-			$response['status']  = 'error';
+		if ($result1 && $result2) {
+			$msg['success'] = true;
 		} else {
-			$response['status']  = 'success';
+			$msg['success'] = false;
 		}
-		echo json_encode($response);
+		echo json_encode($msg);
 	}
 
 	public function bacaDetail(){
@@ -54,6 +66,11 @@ class Minjam extends CI_Controller {
 		);
 
 		$this->load->view('transaksi/Minjam/detailPinjam', $data);
+	}
+
+	public function autoDetail(){
+		$result = $this->MinjamModel->autoDetail();
+		echo $result;
 	}
 
 }

@@ -64,6 +64,10 @@
 
 			detailPinjam();
 
+			$('#myModal').on('hidden.bs.modal', function (e) {
+				$('#myForm')[0].reset();
+			});
+
 			$(document).on('click', '#delAlat', function(e){
 				var id_alat = $(this).data('id');
 				var urlAlat = '<?php echo base_url('master/Alat/hapus/'); ?>';
@@ -90,48 +94,76 @@
 
 			$(document).on('click', '#delDetail', function(e){
 				var id_detail = $(this).data('id');
+				var id_alat = $(this).data('id-alat');
+				var jumlah = $(this).data('jumlah-alat');
 
 				$.ajax({
-					url: '<?php echo base_url('transaksi/Minjam/hapusDetail/'); ?>' + id_detail,
-					dataType: 'json'
-				})
-				.done(function(response){
-					detailPinjam();
-				})
-				.fail(function(){
-					swal('Oops...', 'Something went wrong with ajax !', 'error');
+					url: '<?php echo base_url('transaksi/Minjam/hapusDetail/'); ?>' +id_detail+ '/' +id_alat+ '/' +jumlah,
+					dataType: 'json',
+					success: function(response){
+						if(response.success){
+							detailPinjam();
+						}else{
+							swal('Oops...', 'Error!', 'error');
+						}
+					},
+					error: function(){
+						swal('Oops...', 'Something went wrong with ajax !', 'error');
+					}
 				});
 				e.preventDefault();
 			});
 
-			/*$('#detail_form').submit(function(e){
-				e.preventDefault(); // Prevent Default Submission
-				
-				$.ajax({
-					url: '<?php echo base_url('transaksi/Minjam/inputDetail/'); ?>',
-					type: 'POST',
-					data: $(this).serialize() // it will serialize the form data
-				})
-				.done(function(response){
-					var id_detail = '<?php echo $id_detail; ?>';
-					var idTerakhir = id_detail.substr(id_detail.length - 1);
-					
-					var hasil = parseInt(idTerakhir)+1;
-					var hasilAkhir = 'DTL00000' + hasil;
+			$('#tambahDetail').click(function(){
+				$('#myModal').modal('show');
+				$('#myModal').find('.modal-title').text('Tambah Alat Yang di Pinjam');
+				autoIdDetailPinjam();
+				$('#myForm').attr('action', '<?php echo base_url('transaksi/Minjam/inputDetail/'); ?>');
+			});
 
-					detailPinjam();
-					$('#jumlah_detail').val('');
-					$('#id_detail').val(hasilAkhir);
-				})
-				.fail(function(){
-					alert('Ajax Submit Failed ...');	
-				});
-			});*/
+			$('#saveDetail').click(function(){
+				var url = $('#myForm').attr('action');
+				var data = $('#myForm').serialize();
+
+				//validasi
+				var jumlah = $('input[name=jumlah]');
+				var result = '';
+
+				if(jumlah.val()==''){
+					jumlah.addClass('is-invalid');
+				}else{
+					jumlah.removeClass('is-invalid');
+					result ='ok';
+				}
+
+				if(result=='ok'){
+					$.ajax({
+						type: 'ajax',
+						method: 'post',
+						url: url,
+						data: data,
+						async: false,
+						dataType: 'json',
+						success: function(response){
+							if(response.success){
+								$('#myModal').modal('hide');
+
+								detailPinjam();
+							}else{
+								alert('Error');
+							}
+						},
+						error: function(){
+							alert('Gagal Menambahkan Alat');
+						}
+					});
+				}
+			});
 
 		});
 
+		// Fungsi Fungsi
 		function SwalDelete(id, url){
-
 			swal({
 				title: 'Apakah Kamu Yakin?',
 				text: "Data Akan Terhapus Secara Permanen!",
@@ -160,8 +192,7 @@
 					});
 				},
 				allowOutsideClick: false			  
-			});	
-
+			});
 		}
 
 		function readProducts(){
@@ -172,6 +203,21 @@
 
 		function detailPinjam(){
 			$('#load-detailPinjam').load('<?php echo base_url('transaksi/Minjam/bacaDetail/'); ?>');
+		}
+
+		function autoIdDetailPinjam(){
+			$.ajax({
+				type: 'ajax',
+				url: '<?php echo base_url('transaksi/Minjam/autoDetail/'); ?>',
+				async: false,
+				dataType: 'json',
+				success: function(data){
+					$('#myModal').find('#idDetail').val(data.kode);
+				},
+				error: function(){
+					alert('Gagal Auto ID Pegawai');
+				}
+			});
 		}
 	</script>
 
