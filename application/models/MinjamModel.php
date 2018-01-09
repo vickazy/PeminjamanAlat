@@ -6,6 +6,7 @@ class MinjamModel extends CI_Model{
 		$this->db->select('detail_peminjam.id_detail, detail_peminjam.id_peminjam, detail_peminjam.id_alat, alat.nama_alat, detail_peminjam.jumlah')
 		->join('alat','detail_peminjam.id_alat = alat.id_alat');
 		$this->db->where($table, $where);
+		$this->db->order_by('id_detail', 'asc');
 		return $this->db->get('detail_peminjam');
 	}
 
@@ -17,12 +18,31 @@ class MinjamModel extends CI_Model{
 		return $this->db->get('keperluan');
 	}
 
+	function tambah(){
+		$data = array(
+			'id_peminjam'				=> $this->input->post('id_peminjam'),
+			'nama_peminjam'				=> $this->input->post('nama_peminjam'),
+			'nis'						=> $this->input->post('nis'),
+			'id_keperluan'				=> $this->input->post('keperluan'),
+			'id_kelas'					=> $this->input->post('kelas'),
+			'no_hp'						=> $this->input->post('no_hp'),
+			'tgl_peminjaman'			=> $this->input->post('tgl_peminjaman'),
+			'tgl_pengembalian_rencana'	=> $this->input->post('tgl_pengembalian_rencana'),
+			'catatan'					=> $this->input->post('catatan'),
+			'id_petugas'				=> $this->session->userdata('id_petugas'),
+			'status'					=> 0
+		);
+
+		return $this->db->insert('peminjam', $data);
+	}
+
 	function inputDetail(){
 		$data = array(
 			'id_detail'		=> $this->input->post('idDetail'),
 			'id_peminjam'	=> $this->input->post('id_peminjam'),
 			'id_alat'		=> $this->input->post('id_alat'),
-			'jumlah'		=> $this->input->post('jumlah_detail')
+			'jumlah'		=> $this->input->post('jumlah_detail'),
+			'status'		=> 0
 		);
 
 		return $this->db->insert('detail_peminjam', $data);

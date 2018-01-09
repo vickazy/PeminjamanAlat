@@ -37,7 +37,7 @@
 								<input type="text" class="form-control" data-format="+62 {{999}}-{{9999}}-{{9999}}" name="no_hp" required>
 							</div>
 							<div class="form-group form-type-material">
-								<select class="form-control show-tick" name="keperluan" data-provide="selectpicker" data-live-search="true">
+								<select class="form-control show-tick" name="kelas" data-provide="selectpicker" data-live-search="true">
 									<?php
 										foreach($kelas as $kls){
 									?>
@@ -54,9 +54,9 @@
 						<div class="col-md-6">
 							<div class="input-group form-group" data-provide="datepicker" data-date-format="yyyy-mm-dd">
 								<span class="input-group-addon">Dari</span>
-								<input type="text" class="form-control" name="tgl_peminjaman">
+								<input type="text" class="form-control" name="tgl_peminjaman" required>
 								<span class="input-group-addon">Sampai</span>
-								<input type="text" class="form-control" name="tgl_pengembalian_rencana">
+								<input type="text" class="form-control" name="tgl_pengembalian_rencana" required>
 							</div>
 							<div class="form-group form-type-material">
 								<select class="form-control show-tick" name="keperluan" data-provide="selectpicker" data-live-search="true">
@@ -72,7 +72,7 @@
 								<label class="label-floated">Keperluan</label>
 							</div>
 							<div class="form-group">
-								<textarea name="alamat" class="form-control" rows="4"></textarea>
+								<textarea name="catatan" class="form-control" rows="4"></textarea>
 								<label>Catatan Tambahan</label>
 							</div>
 							<div class="form-group">

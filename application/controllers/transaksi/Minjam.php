@@ -25,10 +25,12 @@ class Minjam extends CI_Controller {
 			'alat'		=> $this->AlatModel->readDetail()->result()
 		);
 
-		/*if ($this->input->post('submit')) {
-			$this->AlatModel->tambah();
-			redirect('master/Alat');
-		}*/
+		if ($this->input->post('submit')) {
+			$result = $this->MinjamModel->tambah();
+			if ($result) {
+				redirect('transaksi/Minjam/tambah');
+			}
+		}
 
 		$this->layouts->utama('transaksi/Minjam/MinjamInsert', $data);
 	}
