@@ -54,9 +54,9 @@
 						<div class="col-md-6">
 							<div class="input-group form-group" data-provide="datepicker" data-date-format="yyyy-mm-dd">
 								<span class="input-group-addon">Dari</span>
-								<input type="text" class="form-control" name="tgl_peminjaman">
+								<input type="text" class="form-control" name="tgl_peminjaman" required>
 								<span class="input-group-addon">Sampai</span>
-								<input type="text" class="form-control" name="tgl_pengembalian_rencana">
+								<input type="text" class="form-control" name="tgl_pengembalian_rencana" required>
 							</div>
 							<div class="form-group form-type-material">
 								<select class="form-control show-tick" name="keperluan" data-provide="selectpicker" data-live-search="true">
