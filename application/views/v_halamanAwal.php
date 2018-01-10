@@ -62,6 +62,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 
+			showAllPeminjam();
 			detailPinjam();
 
 			$('#myModal').on('hidden.bs.modal', function (e) {
@@ -160,6 +161,13 @@
 				}
 			});
 
+			$('#tampilData').on('click', '#lihatDataPinjam', function(){
+				var id_peminjam = $(this).data('id');
+
+				$('#myModal').modal('show');
+				$('#myModal').find('.modal-title').text(id_peminjam);
+			});
+
 		});
 
 		// Fungsi Fungsi
@@ -216,6 +224,35 @@
 				},
 				error: function(){
 					alert('Gagal Auto ID Pegawai');
+				}
+			});
+		}
+
+		function showAllPeminjam(){
+			$.ajax({
+				type: 'ajax',
+				url: '<?php echo base_url() ?>transaksi/Minjam/tampilData',
+				dataType: 'json',
+				success: function(data){
+					var html = '';
+					var i;
+					for(i=0; i<data.length; i++){
+						html += '<tr>'+
+									'<td>'+data[i].id_peminjam+'</td>'+
+									'<td>'+data[i].nis+'</td>'+
+									'<td>'+data[i].nama_peminjam+'</td>'+
+									'<td>'+data[i].no_hp+'</td>'+
+									'<td>'+data[i].nama_keperluan+'</td>'+
+									'<td>'+data[i].nama_kelas+'</td>'+
+									'<td>'+data[i].tgl_peminjaman+'</td>'+
+									'<td>'+data[i].tgl_pengembalian_rencana+'</td>'+
+									'<td><button type="button" id="lihatDataPinjam" class="btn btn-primary" data-id="'+data[i].id_peminjam+'">Lihat</button></td>'+
+							'</tr>'
+					}
+					$('#tampilData').html(html);
+				},
+				error: function(){
+					alert('Could not get Data from Database');
 				}
 			});
 		}

@@ -7,8 +7,8 @@
 
 			<div class="header-action">
 				<nav class="nav">
+					<a class="nav-link" href="<?php echo base_url('transaksi/Minjam'); ?>">Lihat Data</a>
 					<a class="nav-link active" href="<?php echo base_url('transaksi/Minjam/tambah'); ?>">Tambah</a>
-					<a class="nav-link" href="<?php echo base_url('master/Alat'); ?>">Lihat Data</a>
 				</nav>
 			</div>
 		</header>
@@ -34,7 +34,7 @@
 							</div>
 							<div class="form-group">
 								<label class="required">No. HP</label>
-								<input type="text" class="form-control" data-format="+62 {{999}}-{{9999}}-{{9999}}" name="no_hp" required>
+								<input type="text" class="form-control" data-format="+62{{999}}-{{9999}}-{{9999}}" name="no_hp" required>
 							</div>
 							<div class="form-group form-type-material">
 								<select class="form-control show-tick" name="kelas" data-provide="selectpicker" data-live-search="true">

@@ -13,7 +13,16 @@ class Minjam extends CI_Controller {
 	}
 
 	public function index(){
+		$data = array(
+			'title' => 'Transaksi Minjam | Halaman '.$this->session->userdata('jabatan')
+		);
 
+		$this->layouts->utama('transaksi/Minjam/MinjamView', $data);
+	}
+
+	public function tampilData(){
+		$result = $this->MinjamModel->bacaData();
+		echo json_encode($result);
 	}
 
 	public function tambah(){

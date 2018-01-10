@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : Localhost
-Source Server Version : 100122
+Source Server         : localhost_3306
+Source Server Version : 100125
 Source Host           : localhost:3306
 Source Database       : peminjaman_alat
 
 Target Server Type    : MYSQL
-Target Server Version : 100122
+Target Server Version : 100125
 File Encoding         : 65001
 
-Date: 2017-12-15 19:37:35
+Date: 2018-01-10 13:08:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,6 +36,7 @@ CREATE TABLE `detail_peminjam` (
   `id_peminjam` varchar(20) NOT NULL,
   `id_alat` varchar(20) NOT NULL,
   `jumlah` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
   KEY `id_peminjam` (`id_peminjam`),
   KEY `id_alat` (`id_alat`),
   CONSTRAINT `id_alat` FOREIGN KEY (`id_alat`) REFERENCES `alat` (`id_alat`)
@@ -80,10 +81,10 @@ DROP TABLE IF EXISTS `peminjam`;
 CREATE TABLE `peminjam` (
   `id_peminjam` varchar(20) NOT NULL,
   `nama_peminjam` varchar(50) NOT NULL,
-  `nis` int(11) NOT NULL,
+  `nis` varchar(20) NOT NULL,
   `id_keperluan` varchar(20) NOT NULL,
   `id_kelas` varchar(10) NOT NULL,
-  `no_hp` varchar(15) NOT NULL,
+  `no_hp` varchar(20) NOT NULL,
   `tgl_peminjaman` date NOT NULL,
   `tgl_pengembalian_rencana` date NOT NULL,
   `catatan` text NOT NULL,

@@ -2,6 +2,20 @@
 
 class MinjamModel extends CI_Model{
 
+	function bacaData(){
+		$this->db->select('peminjam.id_peminjam, peminjam.nama_peminjam, peminjam.nis, keperluan.nama_keperluan, kelas.nama_kelas, peminjam.no_hp, peminjam.tgl_peminjaman, peminjam.tgl_pengembalian_rencana, peminjam.catatan, peminjam.id_petugas, peminjam.`status`')
+		->join('kelas', 'peminjam.id_kelas = kelas.id_kelas')
+		->join('keperluan', 'peminjam.id_keperluan = keperluan.id_keperluan');
+		$this->db->where('status', 0);
+		$this->db->order_by('id_peminjam', 'asc');
+		$query = $this->db->get('peminjam');
+		if($query->num_rows() > 0){
+			return $query->result();
+		}else{
+			return false;
+		}
+	}
+
 	function bacaDetailPinjam($where, $table){
 		$this->db->select('detail_peminjam.id_detail, detail_peminjam.id_peminjam, detail_peminjam.id_alat, alat.nama_alat, detail_peminjam.jumlah')
 		->join('alat','detail_peminjam.id_alat = alat.id_alat');

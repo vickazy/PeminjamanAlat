@@ -33,7 +33,7 @@
 
 							<div class="form-group">
 								<label>No. HP</label>
-								<input type="text" class="form-control" data-format="+62 {{999}}-{{9999}}-{{9999}}" name="no_hp">
+								<input type="text" class="form-control" data-format="+62{{999}}-{{9999}}-{{9999}}" name="no_hp">
 							</div>
 
 							<div class="col">

@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : Localhost
-Source Server Version : 100122
+Source Server         : localhost_3306
+Source Server Version : 100125
 Source Host           : localhost:3306
 Source Database       : peminjaman_alat
 
 Target Server Type    : MYSQL
-Target Server Version : 100122
+Target Server Version : 100125
 File Encoding         : 65001
 
-Date: 2017-12-15 19:37:27
+Date: 2018-01-10 13:07:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,8 +30,8 @@ CREATE TABLE `alat` (
 -- ----------------------------
 -- Records of alat
 -- ----------------------------
-INSERT INTO `alat` VALUES ('ALT0001', 'Wacom Bamboo', '7', '10');
-INSERT INTO `alat` VALUES ('ALT0002', 'Kamera DSLR', '2', '2');
+INSERT INTO `alat` VALUES ('ALT0001', 'Wacom Bamboo', '5', '10');
+INSERT INTO `alat` VALUES ('ALT0002', 'Kamera DSLR', '0', '2');
 INSERT INTO `alat` VALUES ('ALT0003', 'Pulpen', '5', '5');
 
 -- ----------------------------
@@ -43,6 +43,7 @@ CREATE TABLE `detail_peminjam` (
   `id_peminjam` varchar(20) NOT NULL,
   `id_alat` varchar(20) NOT NULL,
   `jumlah` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
   KEY `id_peminjam` (`id_peminjam`),
   KEY `id_alat` (`id_alat`),
   CONSTRAINT `id_alat` FOREIGN KEY (`id_alat`) REFERENCES `alat` (`id_alat`)
@@ -51,6 +52,9 @@ CREATE TABLE `detail_peminjam` (
 -- ----------------------------
 -- Records of detail_peminjam
 -- ----------------------------
+INSERT INTO `detail_peminjam` VALUES ('DTL000001', 'PJM00001', 'ALT0002', '1', '0');
+INSERT INTO `detail_peminjam` VALUES ('DTL000002', 'PJM00002', 'ALT0001', '1', '0');
+INSERT INTO `detail_peminjam` VALUES ('DTL000003', 'PJM00002', 'ALT0002', '1', '0');
 
 -- ----------------------------
 -- Table structure for kelas
@@ -114,10 +118,10 @@ DROP TABLE IF EXISTS `peminjam`;
 CREATE TABLE `peminjam` (
   `id_peminjam` varchar(20) NOT NULL,
   `nama_peminjam` varchar(50) NOT NULL,
-  `nis` int(11) NOT NULL,
+  `nis` varchar(20) NOT NULL,
   `id_keperluan` varchar(20) NOT NULL,
   `id_kelas` varchar(10) NOT NULL,
-  `no_hp` varchar(15) NOT NULL,
+  `no_hp` varchar(20) NOT NULL,
   `tgl_peminjaman` date NOT NULL,
   `tgl_pengembalian_rencana` date NOT NULL,
   `catatan` text NOT NULL,
@@ -135,6 +139,8 @@ CREATE TABLE `peminjam` (
 -- ----------------------------
 -- Records of peminjam
 -- ----------------------------
+INSERT INTO `peminjam` VALUES ('PJM00001', 'Jajang S', '9981895817', 'KPL001', 'KLS0005', '+62895-2002-2712', '2018-01-10', '2018-01-15', '', 'PTG0001', '0');
+INSERT INTO `peminjam` VALUES ('PJM00002', 'Maman P', '987654321', 'KPL002', 'KLS0004', '+62877-7545-4695', '2018-01-10', '2018-01-12', '', 'PTG0001', '0');
 
 -- ----------------------------
 -- Table structure for pengembalian
