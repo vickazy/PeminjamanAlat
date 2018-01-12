@@ -10,7 +10,7 @@ class MinjamModel extends CI_Model{
 		$this->db->order_by('id_peminjam', 'asc');
 		$query = $this->db->get('peminjam');
 		if($query->num_rows() > 0){
-			return $query->result();
+			return $query->result_array();
 		}else{
 			return false;
 		}

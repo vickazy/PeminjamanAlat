@@ -59,11 +59,10 @@
 	<script src="<?php echo base_url('assets/js/app.min.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/script.min.js'); ?>"></script>
 
+	<?php echo $footClass; ?>
+
 	<script type="text/javascript">
 		$(document).ready(function(){
-
-			showAllPeminjam();
-			detailPinjam();
 
 			$('#myModal').on('hidden.bs.modal', function (e) {
 				$('#myForm')[0].reset();
@@ -91,81 +90,6 @@
 
 				SwalDelete(id_keperluan, urlKeperluan);
 				e.preventDefault();
-			});
-
-			$(document).on('click', '#delDetail', function(e){
-				var id_detail = $(this).data('id');
-				var id_alat = $(this).data('id-alat');
-				var jumlah = $(this).data('jumlah-alat');
-
-				$.ajax({
-					url: '<?php echo base_url('transaksi/Minjam/hapusDetail/'); ?>' +id_detail+ '/' +id_alat+ '/' +jumlah,
-					dataType: 'json',
-					success: function(response){
-						if(response.success){
-							detailPinjam();
-						}else{
-							swal('Oops...', 'Error!', 'error');
-						}
-					},
-					error: function(){
-						swal('Oops...', 'Something went wrong with ajax !', 'error');
-					}
-				});
-				e.preventDefault();
-			});
-
-			$('#tambahDetail').click(function(){
-				$('#myModal').modal('show');
-				$('#myModal').find('.modal-title').text('Tambah Alat Yang di Pinjam');
-				autoIdDetailPinjam();
-				$('#myForm').attr('action', '<?php echo base_url('transaksi/Minjam/inputDetail/'); ?>');
-			});
-
-			$('#saveDetail').click(function(){
-				var url = $('#myForm').attr('action');
-				var data = $('#myForm').serialize();
-
-				//validasi
-				var jumlah = $('input[name=jumlah]');
-				var result = '';
-
-				if(jumlah.val()==''){
-					jumlah.addClass('is-invalid');
-				}else{
-					jumlah.removeClass('is-invalid');
-					result ='ok';
-				}
-
-				if(result=='ok'){
-					$.ajax({
-						type: 'ajax',
-						method: 'post',
-						url: url,
-						data: data,
-						async: false,
-						dataType: 'json',
-						success: function(response){
-							if(response.success){
-								$('#myModal').modal('hide');
-
-								detailPinjam();
-							}else{
-								alert('Error');
-							}
-						},
-						error: function(){
-							alert('Gagal Menambahkan Alat');
-						}
-					});
-				}
-			});
-
-			$('#tampilData').on('click', '#lihatDataPinjam', function(){
-				var id_peminjam = $(this).data('id');
-
-				$('#myModal').modal('show');
-				$('#myModal').find('.modal-title').text(id_peminjam);
 			});
 
 		});
@@ -207,54 +131,6 @@
 			setTimeout(function () {
 				location.reload()
 			}, 900);
-		}
-
-		function detailPinjam(){
-			$('#load-detailPinjam').load('<?php echo base_url('transaksi/Minjam/bacaDetail/'); ?>');
-		}
-
-		function autoIdDetailPinjam(){
-			$.ajax({
-				type: 'ajax',
-				url: '<?php echo base_url('transaksi/Minjam/autoDetail/'); ?>',
-				async: false,
-				dataType: 'json',
-				success: function(data){
-					$('#myModal').find('#idDetail').val(data.kode);
-				},
-				error: function(){
-					alert('Gagal Auto ID Pegawai');
-				}
-			});
-		}
-
-		function showAllPeminjam(){
-			$.ajax({
-				type: 'ajax',
-				url: '<?php echo base_url() ?>transaksi/Minjam/tampilData',
-				dataType: 'json',
-				success: function(data){
-					var html = '';
-					var i;
-					for(i=0; i<data.length; i++){
-						html += '<tr>'+
-									'<td>'+data[i].id_peminjam+'</td>'+
-									'<td>'+data[i].nis+'</td>'+
-									'<td>'+data[i].nama_peminjam+'</td>'+
-									'<td>'+data[i].no_hp+'</td>'+
-									'<td>'+data[i].nama_keperluan+'</td>'+
-									'<td>'+data[i].nama_kelas+'</td>'+
-									'<td>'+data[i].tgl_peminjaman+'</td>'+
-									'<td>'+data[i].tgl_pengembalian_rencana+'</td>'+
-									'<td><button type="button" id="lihatDataPinjam" class="btn btn-primary" data-id="'+data[i].id_peminjam+'">Lihat</button></td>'+
-							'</tr>'
-					}
-					$('#tampilData').html(html);
-				},
-				error: function(){
-					alert('Could not get Data from Database');
-				}
-			});
 		}
 	</script>
 

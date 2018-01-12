@@ -118,14 +118,8 @@
 							</div>
 							<div class="form-group">
 								<label for="name" class="col-form-label">Nama Alat:</label>
-								<select class="form-control show-tick" name="id_alat" data-provide="selectpicker" data-live-search="true">
-									<?php
-										foreach($alat as $alt){
-									?>
-										<option value="<?php echo $alt->id_alat ?>"><?php echo $alt->nama_alat." - Stok : ".$alt->stok; ?></option>
-									<?php
-										}
-									?>
+								<select id="stokAlat" class="form-control show-tick" name="id_alat" data-provide="selectpicker" data-live-search="true">
+
 								</select>
 							</div>
 							<div class="form-group">

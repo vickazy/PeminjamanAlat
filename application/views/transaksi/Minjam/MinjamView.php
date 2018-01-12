@@ -18,7 +18,7 @@
 				<h4 class="card-title">Data Yang Meminjam Belum di Kembalikan</h4>
 
 				<div class="card-body">
-					<table class="table table-striped table-bordered" cellspacing="0" data-provide="datatables">
+					<table id="tampilData" class="table table-striped table-bordered" cellspacing="0" data-provide="datatables" data-ajax="<?php echo base_url() ?>transaksi/Minjam/tampilData">
 						<thead>
 							<tr>
 								<th>ID Peminjam</th>
@@ -45,9 +45,6 @@
 								<th>Action</th>
 							</tr>
 						</tfoot>
-						<tbody id="tampilData">
-							
-						</tbody>
 					</table>
 				</div>
 			</div>
