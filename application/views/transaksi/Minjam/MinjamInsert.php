@@ -118,7 +118,7 @@
 							</div>
 							<div class="form-group">
 								<label for="name" class="col-form-label">Nama Alat:</label>
-								<select id="stokAlat" class="form-control show-tick" name="id_alat" data-provide="selectpicker" data-live-search="true">
+								<select id="selectStokAlat" class="form-control show-tick" name="id_alat" data-provide="" data-live-search="">
 
 								</select>
 							</div>

@@ -99,24 +99,19 @@
 		}
 
 		function autoStokAlat(){
-			$('#stokAlat').empty();
-
 			$.ajax({
 				type: 'ajax',
 				url: '<?php echo base_url('transaksi/Minjam/stokAlat/'); ?>',
 				dataType: 'json',
 				success: function(data){
-					$.each(data, function(i, d){
-						$('#stokAlat').append('<option value"'+d.id_alat+'">'+d.nama_alat+' - Stok : '+d.stok+'</option>');
-					});
-
-					/*var html = '';
-					var i;
-					for(i=0; i<data.length; i++){
-						html += '<option>12</option>';
+					var html = '';
+					for(var i=0; i<data.length; i++){
 						html += '<option value="'+data[i].id_alat+'">'+data[i].nama_alat+' - Stok : '+data[i].stok+'</option>';
 					}
-					$('#stokAlat').html(html);*/
+
+					$('#selectStokAlat').html(html);
+					/*$('#selectStokAlat').attr('data-provide', 'selectpicker');
+					$('#selectStokAlat').attr('data-live-search', 'true');*/
 				},
 				error: function(){
 					alert('Gagal Auto ID Pegawai');
