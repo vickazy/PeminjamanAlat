@@ -51,15 +51,31 @@ class MinjamModel extends CI_Model{
 	}
 
 	function inputDetail(){
-		$data = array(
-			'id_detail'		=> $this->input->post('idDetail'),
-			'id_peminjam'	=> $this->input->post('id_peminjam'),
-			'id_alat'		=> $this->input->post('id_alat'),
-			'jumlah'		=> $this->input->post('jumlah_detail'),
-			'status'		=> 0
-		);
+		$this->db->where('id_peminjam', $this->input->post('id_peminjam'));
+		$this->db->where('id_alat', $this->input->post('id_alat'));
+		$query = $this->db->get('detail_peminjam');
 
-		return $this->db->insert('detail_peminjam', $data);
+		if ($query->num_rows() <> 0) {
+			$jumlah = $query->row();
+			$jumlahBaru = intval($jumlah->jumlah) + $this->input->post('jumlah_detail');
+			$data = array(
+				'jumlah'		=> $jumlahBaru
+			);
+
+			$this->db->where('id_peminjam', $this->input->post('id_peminjam'));
+			$this->db->where('id_alat', $this->input->post('id_alat'));
+			return $this->db->update('detail_peminjam', $data);
+		} else {
+			$data = array(
+				'id_detail'		=> $this->input->post('idDetail'),
+				'id_peminjam'	=> $this->input->post('id_peminjam'),
+				'id_alat'		=> $this->input->post('id_alat'),
+				'jumlah'		=> $this->input->post('jumlah_detail'),
+				'status'		=> 0
+			);
+
+			return $this->db->insert('detail_peminjam', $data);
+		}
 	}
 
 	function hapusDetail($where, $table){

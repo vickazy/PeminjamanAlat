@@ -74,14 +74,17 @@ class Minjam extends CI_Controller {
 
 	public function inputDetail(){
 		$result1 = $this->MinjamModel->inputDetail();
-		$result2 = $this->MinjamModel->kurangStok();
+		
 
 		$msg['success'] = false;
-
-		if($result1 && $result2){
-			$msg['success'] = true;
+		
+		if ($result1) {
+			$result2 = $this->MinjamModel->kurangStok();
+			if($result1 && $result2){
+				$msg['success'] = true;
+			}
 		}
-
+		
 		echo json_encode($msg);
 	}
 

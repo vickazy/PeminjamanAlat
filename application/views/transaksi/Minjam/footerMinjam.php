@@ -45,7 +45,7 @@
 				var data = $('#myForm').serialize();
 
 				//validasi
-				var jumlah = $('input[name=jumlah]');
+				var jumlah = $('input[name=jumlah_detail]');
 				var result = '';
 
 				if(jumlah.val()==''){
