@@ -7,7 +7,9 @@
 				var id_peminjam = $(this).data('id');
 
 				$('#myModal').modal('show');
-				$('#myModal').find('.modal-title').text(id_peminjam);
+				$('#myModal').find('.modal-title').text('Data Peminjam');
+
+				$('#id_peminjam').val(id_peminjam);
 			});
 
 			$(document).on('click', '#delDetail', function(e){
@@ -68,11 +70,11 @@
 
 								detailPinjam();
 							}else{
-								alert('Error');
+								swal('Oops...', 'Error!', 'error');
 							}
 						},
 						error: function(){
-							alert('Gagal Menambahkan Alat');
+							swal('Oops...', 'Gagal Menambahkan Alat', 'error');
 						}
 					});
 				}

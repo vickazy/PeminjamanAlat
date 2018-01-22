@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100125
 File Encoding         : 65001
 
-Date: 2018-01-10 13:07:57
+Date: 2018-01-22 14:08:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,38 +23,33 @@ CREATE TABLE `alat` (
   `id_alat` varchar(20) NOT NULL,
   `nama_alat` varchar(30) NOT NULL,
   `stok` int(11) NOT NULL,
-  `jumlah` int(11) DEFAULT NULL,
+  `jumlah` int(11) NOT NULL,
   PRIMARY KEY (`id_alat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of alat
 -- ----------------------------
-INSERT INTO `alat` VALUES ('ALT0001', 'Wacom Bamboo', '5', '10');
+INSERT INTO `alat` VALUES ('ALT0001', 'Wacom Bamboo', '7', '10');
 INSERT INTO `alat` VALUES ('ALT0002', 'Kamera DSLR', '0', '2');
 INSERT INTO `alat` VALUES ('ALT0003', 'Pulpen', '5', '5');
+INSERT INTO `alat` VALUES ('ALT0004', 'Pensil', '10', '10');
 
 -- ----------------------------
--- Table structure for detail_peminjam
+-- Table structure for alat_detail
 -- ----------------------------
-DROP TABLE IF EXISTS `detail_peminjam`;
-CREATE TABLE `detail_peminjam` (
-  `id_detail` varchar(20) NOT NULL,
-  `id_peminjam` varchar(20) NOT NULL,
+DROP TABLE IF EXISTS `alat_detail`;
+CREATE TABLE `alat_detail` (
   `id_alat` varchar(20) NOT NULL,
-  `jumlah` int(11) NOT NULL,
+  `kode_alat` varchar(25) NOT NULL,
+  `kondisi` varchar(15) NOT NULL,
   `status` int(11) NOT NULL,
-  KEY `id_peminjam` (`id_peminjam`),
-  KEY `id_alat` (`id_alat`),
-  CONSTRAINT `id_alat` FOREIGN KEY (`id_alat`) REFERENCES `alat` (`id_alat`)
+  PRIMARY KEY (`kode_alat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of detail_peminjam
+-- Records of alat_detail
 -- ----------------------------
-INSERT INTO `detail_peminjam` VALUES ('DTL000001', 'PJM00001', 'ALT0002', '1', '0');
-INSERT INTO `detail_peminjam` VALUES ('DTL000002', 'PJM00002', 'ALT0001', '1', '0');
-INSERT INTO `detail_peminjam` VALUES ('DTL000003', 'PJM00002', 'ALT0002', '1', '0');
 
 -- ----------------------------
 -- Table structure for kelas
@@ -109,7 +104,7 @@ CREATE TABLE `login` (
 -- ----------------------------
 INSERT INTO `login` VALUES ('jajang', 'b56b57039c86f8626ece5a1a35f86175', '');
 INSERT INTO `login` VALUES ('ridhansholeh', 'ce741e2ff01555b58879487957d645dd', '2017-11-02');
-INSERT INTO `login` VALUES ('udin', '3af4c9341e31bce1f4262a326285170d', '');
+INSERT INTO `login` VALUES ('udin', 'b56b57039c86f8626ece5a1a35f86175', '');
 
 -- ----------------------------
 -- Table structure for peminjam
@@ -127,6 +122,7 @@ CREATE TABLE `peminjam` (
   `catatan` text NOT NULL,
   `id_petugas` varchar(20) NOT NULL,
   `status` int(11) DEFAULT NULL,
+  `status_acc` int(11) NOT NULL,
   PRIMARY KEY (`id_peminjam`),
   KEY `id_keperluan` (`id_keperluan`),
   KEY `id_petugas` (`id_petugas`),
@@ -139,8 +135,30 @@ CREATE TABLE `peminjam` (
 -- ----------------------------
 -- Records of peminjam
 -- ----------------------------
-INSERT INTO `peminjam` VALUES ('PJM00001', 'Jajang S', '9981895817', 'KPL001', 'KLS0005', '+62895-2002-2712', '2018-01-10', '2018-01-15', '', 'PTG0001', '0');
-INSERT INTO `peminjam` VALUES ('PJM00002', 'Maman P', '987654321', 'KPL002', 'KLS0004', '+62877-7545-4695', '2018-01-10', '2018-01-12', '', 'PTG0001', '0');
+INSERT INTO `peminjam` VALUES ('PJM00001', 'Jajang S', '9981895817', 'KPL001', 'KLS0005', '+62895-2002-2712', '2018-01-10', '2018-01-15', '', 'PTG0001', '0', '0');
+INSERT INTO `peminjam` VALUES ('PJM00002', 'Maman P', '987654321', 'KPL002', 'KLS0004', '+62877-7545-4695', '2018-01-10', '2018-01-12', '', 'PTG0001', '0', '0');
+
+-- ----------------------------
+-- Table structure for peminjam_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `peminjam_detail`;
+CREATE TABLE `peminjam_detail` (
+  `id_detail` varchar(20) NOT NULL,
+  `id_peminjam` varchar(20) NOT NULL,
+  `id_alat` varchar(20) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  KEY `id_peminjam` (`id_peminjam`),
+  KEY `id_alat` (`id_alat`),
+  CONSTRAINT `id_alat` FOREIGN KEY (`id_alat`) REFERENCES `alat` (`id_alat`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of peminjam_detail
+-- ----------------------------
+INSERT INTO `peminjam_detail` VALUES ('DTL000001', 'PJM00001', 'ALT0002', '1', '0');
+INSERT INTO `peminjam_detail` VALUES ('DTL000002', 'PJM00002', 'ALT0001', '1', '0');
+INSERT INTO `peminjam_detail` VALUES ('DTL000003', 'PJM00002', 'ALT0002', '1', '0');
 
 -- ----------------------------
 -- Table structure for pengembalian
@@ -183,4 +201,23 @@ CREATE TABLE `petugas` (
 -- ----------------------------
 INSERT INTO `petugas` VALUES ('PTG0001', 'Ridhan Sholeh', 'Jl. Cihanjuang', '+62 895-2002-2712', 'L', '1999-01-21', 'Cimahi', 'ridhansholeh', 'Admin');
 INSERT INTO `petugas` VALUES ('PTG0002', 'Jajang', 'Cimahi', '+62 895-2002-2712', 'L', '1995-03-22', 'Bandung', 'jajang', 'Petugas');
-INSERT INTO `petugas` VALUES ('PTG0003', 'Udin', 'Jl Cimahi', '+62 659-8775-1211', 'L', '2017-12-12', 'Bandung', 'udin', 'Admin');
+INSERT INTO `petugas` VALUES ('PTG0003', 'Udin', 'Jl Cimahi', '+62 659-8775-1211', 'L', '2017-12-12', 'Bandung', 'udin', 'Petugas');
+
+-- ----------------------------
+-- Table structure for siswa
+-- ----------------------------
+DROP TABLE IF EXISTS `siswa`;
+CREATE TABLE `siswa` (
+  `nis` varchar(15) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `nama_ortu` varchar(50) NOT NULL,
+  `no_hp` varchar(20) NOT NULL,
+  `id_kelas` varchar(10) NOT NULL,
+  `password` text NOT NULL,
+  PRIMARY KEY (`nis`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of siswa
+-- ----------------------------
+INSERT INTO `siswa` VALUES ('123456', 'Ayu', 'Dadan', '+62895-2548-9661', 'KLS0003', 'fae38bd94701cdf2a9d114425cb40292');

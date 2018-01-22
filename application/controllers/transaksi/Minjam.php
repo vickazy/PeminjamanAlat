@@ -84,13 +84,13 @@ class Minjam extends CI_Controller {
 				$msg['success'] = true;
 			}
 		}
-		
+
 		echo json_encode($msg);
 	}
 
 	public function hapusDetail($id_detail, $id_alat, $jumlah){
 		$where = array('id_detail' => $id_detail);
-		$result1 = $this->MinjamModel->hapusDetail($where,'detail_peminjam');
+		$result1 = $this->MinjamModel->hapusDetail($where,'peminjam_detail');
 		$result2 = $this->MinjamModel->tambahStok($id_alat, $jumlah);
 
 		if ($result1 && $result2) {

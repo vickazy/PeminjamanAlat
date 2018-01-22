@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100125
 File Encoding         : 65001
 
-Date: 2018-01-10 13:08:06
+Date: 2018-01-22 14:08:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,23 +23,20 @@ CREATE TABLE `alat` (
   `id_alat` varchar(20) NOT NULL,
   `nama_alat` varchar(30) NOT NULL,
   `stok` int(11) NOT NULL,
-  `jumlah` int(11) DEFAULT NULL,
+  `jumlah` int(11) NOT NULL,
   PRIMARY KEY (`id_alat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for detail_peminjam
+-- Table structure for alat_detail
 -- ----------------------------
-DROP TABLE IF EXISTS `detail_peminjam`;
-CREATE TABLE `detail_peminjam` (
-  `id_detail` varchar(20) NOT NULL,
-  `id_peminjam` varchar(20) NOT NULL,
+DROP TABLE IF EXISTS `alat_detail`;
+CREATE TABLE `alat_detail` (
   `id_alat` varchar(20) NOT NULL,
-  `jumlah` int(11) NOT NULL,
+  `kode_alat` varchar(25) NOT NULL,
+  `kondisi` varchar(15) NOT NULL,
   `status` int(11) NOT NULL,
-  KEY `id_peminjam` (`id_peminjam`),
-  KEY `id_alat` (`id_alat`),
-  CONSTRAINT `id_alat` FOREIGN KEY (`id_alat`) REFERENCES `alat` (`id_alat`)
+  PRIMARY KEY (`kode_alat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
@@ -90,6 +87,7 @@ CREATE TABLE `peminjam` (
   `catatan` text NOT NULL,
   `id_petugas` varchar(20) NOT NULL,
   `status` int(11) DEFAULT NULL,
+  `status_acc` int(11) NOT NULL,
   PRIMARY KEY (`id_peminjam`),
   KEY `id_keperluan` (`id_keperluan`),
   KEY `id_petugas` (`id_petugas`),
@@ -97,6 +95,21 @@ CREATE TABLE `peminjam` (
   CONSTRAINT `id_kelas` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`),
   CONSTRAINT `id_keperluan` FOREIGN KEY (`id_keperluan`) REFERENCES `keperluan` (`id_keperluan`),
   CONSTRAINT `id_petugas` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for peminjam_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `peminjam_detail`;
+CREATE TABLE `peminjam_detail` (
+  `id_detail` varchar(20) NOT NULL,
+  `id_peminjam` varchar(20) NOT NULL,
+  `id_alat` varchar(20) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  KEY `id_peminjam` (`id_peminjam`),
+  KEY `id_alat` (`id_alat`),
+  CONSTRAINT `id_alat` FOREIGN KEY (`id_alat`) REFERENCES `alat` (`id_alat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
@@ -129,4 +142,18 @@ CREATE TABLE `petugas` (
   PRIMARY KEY (`id_petugas`),
   KEY `username` (`username`),
   CONSTRAINT `username` FOREIGN KEY (`username`) REFERENCES `login` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for siswa
+-- ----------------------------
+DROP TABLE IF EXISTS `siswa`;
+CREATE TABLE `siswa` (
+  `nis` varchar(15) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `nama_ortu` varchar(50) NOT NULL,
+  `no_hp` varchar(20) NOT NULL,
+  `id_kelas` varchar(10) NOT NULL,
+  `password` text NOT NULL,
+  PRIMARY KEY (`nis`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -61,7 +61,22 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						...
+						<form id="myForm" action="" method="post" class="form-horizontal">
+							<div class="form-group">
+								<label for="name" class="col-form-label">ID Peminjam:</label>
+								<input type="text" name="id_peminjam" id="id_peminjam" class="form-control" readonly>
+							</div>
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input">
+								<span class="custom-control-indicator"></span>
+								<span class="custom-control-description">Unchecked</span>
+							</label>
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input">
+								<span class="custom-control-indicator"></span>
+								<span class="custom-control-description">Unchecked</span>
+							</label>
+						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

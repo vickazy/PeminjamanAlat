@@ -17,11 +17,11 @@ class MinjamModel extends CI_Model{
 	}
 
 	function bacaDetailPinjam($where, $table){
-		$this->db->select('detail_peminjam.id_detail, detail_peminjam.id_peminjam, detail_peminjam.id_alat, alat.nama_alat, detail_peminjam.jumlah')
-		->join('alat','detail_peminjam.id_alat = alat.id_alat');
+		$this->db->select('peminjam_detail.id_detail, peminjam_detail.id_peminjam, peminjam_detail.id_alat, alat.nama_alat, peminjam_detail.jumlah')
+		->join('alat','peminjam_detail.id_alat = alat.id_alat');
 		$this->db->where($table, $where);
 		$this->db->order_by('id_detail', 'asc');
-		return $this->db->get('detail_peminjam');
+		return $this->db->get('peminjam_detail');
 	}
 
 	function bacaKelas(){
@@ -53,7 +53,7 @@ class MinjamModel extends CI_Model{
 	function inputDetail(){
 		$this->db->where('id_peminjam', $this->input->post('id_peminjam'));
 		$this->db->where('id_alat', $this->input->post('id_alat'));
-		$query = $this->db->get('detail_peminjam');
+		$query = $this->db->get('peminjam_detail');
 
 		if ($query->num_rows() <> 0) {
 			$jumlah = $query->row();
@@ -64,7 +64,7 @@ class MinjamModel extends CI_Model{
 
 			$this->db->where('id_peminjam', $this->input->post('id_peminjam'));
 			$this->db->where('id_alat', $this->input->post('id_alat'));
-			return $this->db->update('detail_peminjam', $data);
+			return $this->db->update('peminjam_detail', $data);
 		} else {
 			$data = array(
 				'id_detail'		=> $this->input->post('idDetail'),
@@ -74,7 +74,7 @@ class MinjamModel extends CI_Model{
 				'status'		=> 0
 			);
 
-			return $this->db->insert('detail_peminjam', $data);
+			return $this->db->insert('peminjam_detail', $data);
 		}
 	}
 
@@ -136,10 +136,10 @@ class MinjamModel extends CI_Model{
 	}
 
 	function autoDetail(){
-		$this->db->select('RIGHT(detail_peminjam.id_detail, 6) as kode');
+		$this->db->select('RIGHT(peminjam_detail.id_detail, 6) as kode');
 		$this->db->order_by('id_peminjam','DESC');
 		$this->db->limit(1);
-		$query = $this->db->get('detail_peminjam');
+		$query = $this->db->get('peminjam_detail');
 
 		if($query-> num_rows() <> 0){
 			$data = $query->row();

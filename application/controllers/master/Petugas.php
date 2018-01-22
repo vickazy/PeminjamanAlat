@@ -5,10 +5,10 @@ class Petugas extends CI_Controller{
 
 	public function __construct(){
 		parent::__construct();
-		$this->simple_login->cek_login(); // Proteksi halaman
+		$this->simple_login->cek_login('Admin'); // Proteksi halaman
 		$this->load->library('Layouts');
 		$this->load->model('PetugasModel');
-			$this->load->helper('url');
+		$this->load->helper('url');
 	}
 
 	public function index(){

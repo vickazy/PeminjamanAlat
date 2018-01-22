@@ -82,7 +82,7 @@
 						</div>
 					</div>
 
-					<h5 class="card-title"><strong>Alat Yang di Pinjam</strong>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="tambahDetail" class="btn btn-primary" style="color: #FFF;">Tambah</a></h5>
+					<h5 class="card-title"><strong>Alat Yang Ingin di Pinjam</strong>&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="tambahDetail" class="btn btn-primary" style="color: #FFF;">Tambah</a></h5>
 					<div class="card-body row">
 						<div class="col-md-12">
 
