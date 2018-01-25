@@ -7,7 +7,7 @@
 	<title><?php echo $title; ?></title>
 
 	<!-- Fonts -->
-	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i" rel="stylesheet"> -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i" rel="stylesheet">
 
 	<!-- Styles -->
 	<link href="<?php echo base_url('assets/css/core.min.css'); ?>" rel="stylesheet">

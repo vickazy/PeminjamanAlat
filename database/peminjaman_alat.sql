@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100125
 File Encoding         : 65001
 
-Date: 2018-01-22 14:08:13
+Date: 2018-01-25 13:03:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -83,6 +83,7 @@ CREATE TABLE `peminjam` (
   `id_kelas` varchar(10) NOT NULL,
   `no_hp` varchar(20) NOT NULL,
   `tgl_peminjaman` date NOT NULL,
+  `tgl_req_peminjaman` date NOT NULL,
   `tgl_pengembalian_rencana` date NOT NULL,
   `catatan` text NOT NULL,
   `id_petugas` varchar(20) NOT NULL,
@@ -93,8 +94,7 @@ CREATE TABLE `peminjam` (
   KEY `id_petugas` (`id_petugas`),
   KEY `id_kelas` (`id_kelas`),
   CONSTRAINT `id_kelas` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`),
-  CONSTRAINT `id_keperluan` FOREIGN KEY (`id_keperluan`) REFERENCES `keperluan` (`id_keperluan`),
-  CONSTRAINT `id_petugas` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`)
+  CONSTRAINT `id_keperluan` FOREIGN KEY (`id_keperluan`) REFERENCES `keperluan` (`id_keperluan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
@@ -104,7 +104,9 @@ DROP TABLE IF EXISTS `peminjam_detail`;
 CREATE TABLE `peminjam_detail` (
   `id_detail` varchar(20) NOT NULL,
   `id_peminjam` varchar(20) NOT NULL,
+  `nis` varchar(15) NOT NULL,
   `id_alat` varchar(20) NOT NULL,
+  `tgl_req_peminjaman` date NOT NULL,
   `jumlah` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   KEY `id_peminjam` (`id_peminjam`),

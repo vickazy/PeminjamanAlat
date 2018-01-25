@@ -54,7 +54,7 @@ class Minjam extends CI_Controller {
 		$data = $this->MinjamModel->bacaData();
 
 		foreach ($data as $key => $value){
-			$button = '<button type="button" id="lihatDataPinjam" class="btn btn-primary" data-id="'.$value['id_peminjam'].'">Lihat</button>';
+			$button = '<button type="button" id="lihatDataPinjam" class="btn btn-danger" data-id="'.$value['id_peminjam'].'">Acc</button>';
 
 			$result['data'][$key] = array(
 				$value['id_peminjam'],

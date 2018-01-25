@@ -15,7 +15,7 @@
 
 		<div class="main-content">
 			<div class="card">
-				<h4 class="card-title">Data Yang Meminjam Belum di Kembalikan</h4>
+				<h4 class="card-title"><strong>Data Yang Meminjam Belum Acc</strong></h4>
 
 				<div class="card-body">
 					<table id="tampilData" class="table table-striped table-bordered" cellspacing="0" data-provide="datatables" data-ajax="<?php echo base_url() ?>transaksi/Minjam/tampilData">
@@ -46,6 +46,14 @@
 							</tr>
 						</tfoot>
 					</table>
+				</div>
+			</div>
+
+			<div class="card">
+				<h4 class="card-title"><strong>Data Yang Meminjam Belum Di Kembalikan</strong></h4>
+
+				<div class="card-body">
+
 				</div>
 			</div>
 		</div>

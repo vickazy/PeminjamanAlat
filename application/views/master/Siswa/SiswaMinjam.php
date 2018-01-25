@@ -18,14 +18,14 @@
 
 				<h4 class="card-title"><strong>Alat Yang Akan Kamu Minjam</strong></h4>
 
-				<form action="" method="post" data-provide="validation">
+				<form action="<?php echo base_url('master/Siswa/Minjam'); ?>" method="post" data-provide="validation">
 					<div class="card-body row">
 						
 						<div class="col-md-6">
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<label>ID Peminjaman</label>
 								<input class="form-control" type="text" name="id_peminjam" value="<?php echo $kode; ?>" readonly>
-							</div>
+							</div> -->
 							<div class="form-group">
 								<label class="required">NIS</label>
 								<input class="form-control" type="text" name="nis" value="<?php echo $this->session->userdata("username"); ?>" readonly>
@@ -87,5 +87,42 @@
 					</footer>
 				</form>
 
+			</div>
+		</div>
+
+		<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Modal title</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form id="myForm" action="" method="post" class="form-horizontal">
+							<!-- <input type="hidden" name="idDetail" id="idDetail">
+							<input type="hidden" name="id_peminjam" value="<?php echo $kode; ?>">
+							<div class="form-group">
+								<label for="name" class="col-form-label">ID Detail:</label>
+								<input type="text" name="idDetail" id="idDetail" class="form-control" readonly>
+							</div> -->
+							<div class="form-group">
+								<label for="name" class="col-form-label">Nama Alat:</label>
+								<select id="selectStokAlat" class="form-control show-tick" name="id_alat" data-provide="" data-live-search="">
+
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="address" class="col-form-label">Jumlah:</label>
+								<input type="number" name="jumlah_detail" class="form-control">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<a href="javascript:void(0)" class="btn btn-secondary" data-dismiss="modal">Batal</a>
+						<a href="javascript:void(0)" id="saveDetail" class="btn btn-primary">Tambah</a>
+					</div>
+				</div>
 			</div>
 		</div>

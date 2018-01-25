@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100125
 File Encoding         : 65001
 
-Date: 2018-01-22 14:08:03
+Date: 2018-01-25 13:03:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,10 +30,10 @@ CREATE TABLE `alat` (
 -- ----------------------------
 -- Records of alat
 -- ----------------------------
-INSERT INTO `alat` VALUES ('ALT0001', 'Wacom Bamboo', '7', '10');
+INSERT INTO `alat` VALUES ('ALT0001', 'Wacom Bamboo', '3', '10');
 INSERT INTO `alat` VALUES ('ALT0002', 'Kamera DSLR', '0', '2');
-INSERT INTO `alat` VALUES ('ALT0003', 'Pulpen', '5', '5');
-INSERT INTO `alat` VALUES ('ALT0004', 'Pensil', '10', '10');
+INSERT INTO `alat` VALUES ('ALT0003', 'Pulpen', '1', '5');
+INSERT INTO `alat` VALUES ('ALT0004', 'Pensil', '8', '10');
 
 -- ----------------------------
 -- Table structure for alat_detail
@@ -118,6 +118,7 @@ CREATE TABLE `peminjam` (
   `id_kelas` varchar(10) NOT NULL,
   `no_hp` varchar(20) NOT NULL,
   `tgl_peminjaman` date NOT NULL,
+  `tgl_req_peminjaman` date NOT NULL,
   `tgl_pengembalian_rencana` date NOT NULL,
   `catatan` text NOT NULL,
   `id_petugas` varchar(20) NOT NULL,
@@ -128,15 +129,15 @@ CREATE TABLE `peminjam` (
   KEY `id_petugas` (`id_petugas`),
   KEY `id_kelas` (`id_kelas`),
   CONSTRAINT `id_kelas` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`),
-  CONSTRAINT `id_keperluan` FOREIGN KEY (`id_keperluan`) REFERENCES `keperluan` (`id_keperluan`),
-  CONSTRAINT `id_petugas` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`)
+  CONSTRAINT `id_keperluan` FOREIGN KEY (`id_keperluan`) REFERENCES `keperluan` (`id_keperluan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of peminjam
 -- ----------------------------
-INSERT INTO `peminjam` VALUES ('PJM00001', 'Jajang S', '9981895817', 'KPL001', 'KLS0005', '+62895-2002-2712', '2018-01-10', '2018-01-15', '', 'PTG0001', '0', '0');
-INSERT INTO `peminjam` VALUES ('PJM00002', 'Maman P', '987654321', 'KPL002', 'KLS0004', '+62877-7545-4695', '2018-01-10', '2018-01-12', '', 'PTG0001', '0', '0');
+INSERT INTO `peminjam` VALUES ('PJM00001', 'Jajang S', '9981895817', 'KPL001', 'KLS0005', '+62895-2002-2712', '2018-01-10', '0000-00-00', '2018-01-15', '', 'PTG0001', '0', '0');
+INSERT INTO `peminjam` VALUES ('PJM00002', 'Maman P', '987654321', 'KPL002', 'KLS0004', '+62877-7545-4695', '2018-01-10', '0000-00-00', '2018-01-12', '', 'PTG0001', '0', '0');
+INSERT INTO `peminjam` VALUES ('PJM00003', 'Ayu', '123456', 'KPL001', 'KLS0003', '+62895-2548-9661', '2018-01-29', '2018-01-24', '2018-01-31', '', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for peminjam_detail
@@ -145,7 +146,9 @@ DROP TABLE IF EXISTS `peminjam_detail`;
 CREATE TABLE `peminjam_detail` (
   `id_detail` varchar(20) NOT NULL,
   `id_peminjam` varchar(20) NOT NULL,
+  `nis` varchar(15) NOT NULL,
   `id_alat` varchar(20) NOT NULL,
+  `tgl_req_peminjaman` date NOT NULL,
   `jumlah` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   KEY `id_peminjam` (`id_peminjam`),
@@ -156,9 +159,11 @@ CREATE TABLE `peminjam_detail` (
 -- ----------------------------
 -- Records of peminjam_detail
 -- ----------------------------
-INSERT INTO `peminjam_detail` VALUES ('DTL000001', 'PJM00001', 'ALT0002', '1', '0');
-INSERT INTO `peminjam_detail` VALUES ('DTL000002', 'PJM00002', 'ALT0001', '1', '0');
-INSERT INTO `peminjam_detail` VALUES ('DTL000003', 'PJM00002', 'ALT0002', '1', '0');
+INSERT INTO `peminjam_detail` VALUES ('DTL000001', 'PJM00001', '', 'ALT0002', '0000-00-00', '1', '0');
+INSERT INTO `peminjam_detail` VALUES ('DTL000002', 'PJM00002', '', 'ALT0001', '0000-00-00', '1', '0');
+INSERT INTO `peminjam_detail` VALUES ('DTL000003', 'PJM00002', '', 'ALT0002', '0000-00-00', '1', '0');
+INSERT INTO `peminjam_detail` VALUES ('DTL000004', 'PJM00003', '123456', 'ALT0001', '2018-01-24', '1', '0');
+INSERT INTO `peminjam_detail` VALUES ('DTL000005', 'PJM00003', '123456', 'ALT0004', '2018-01-24', '1', '0');
 
 -- ----------------------------
 -- Table structure for pengembalian
