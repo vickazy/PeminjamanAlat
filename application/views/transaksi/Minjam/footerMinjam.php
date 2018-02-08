@@ -1,6 +1,12 @@
 <script type="text/javascript">
 		$(document).ready(function(){
 
+			$('#myModal').on('hidden.bs.modal', function (e) {
+				$('#myForm')[0].reset();
+				$('#checkboxAlatDipinjam').empty();
+				$('#selectAlatDiPinjam').empty();
+			});
+
 			detailPinjam();
 
 			$('#tampilData').on('click', '#lihatDataPinjam', function(){
@@ -8,8 +14,87 @@
 
 				$('#myModal').modal('show');
 				$('#myModal').find('.modal-title').text('Data Peminjam');
+				$('#myForm').attr('action', '<?php echo base_url('transaksi/Minjam/tambahAcc/'); ?>');
 
-				$('#id_peminjam').val(id_peminjam);
+				$.ajax({
+					url: '<?php echo base_url('transaksi/Minjam/bacaPinjamAcc/'); ?>'+id_peminjam,
+					dataType: 'json',
+					success: function(response){
+						$.each(response, function(i, item){
+							$("#id_peminjam").val(item.id_peminjam);
+							$("#nama_peminjam").val(item.nama_peminjam);
+							$('<label class="custom-control custom-checkbox"></label>').html('<input type="checkbox" class="custom-control-input" id="cekBox'+item.id_detail+'" data-id="'+item.id_detail+'" data-idAlat="'+item.id_alat+'" data-jumlah="'+item.jumlah+'" name="cekBoxAlatDiPinjam[]">'+
+								'<span class="custom-control-indicator"></span>'+
+								'<span class="custom-control-description">'+item.jumlah+' '+item.nama_alat+'</span>').appendTo('#checkboxAlatDipinjam');
+						});
+					},
+					error: function(){
+						swal('Oops...', 'Something went wrong with ajax !', 'error');
+					}
+				});
+			});
+
+			$('#btnTerima').click(function(){
+				var url = $('#myForm').attr('action');
+				var data = $('#myForm').serialize();
+
+				$.ajax({
+					type: 'ajax',
+					method: 'post',
+					url: url,
+					data: data,
+					dataType: 'json',
+					success: function(response){
+						if (response.success){
+							$('#myModal').modal('hide');
+
+							$('#tampilData').DataTable().ajax.reload();
+						}else{
+							swal('Oops...', 'Error!', 'error');
+						}
+					},
+					error: function(){
+						swal('Oops...', 'Something went wrong with ajax !', 'error');
+					}
+				});
+
+			});
+
+			$('#checkboxAlatDipinjam').on('click', 'input', function(){
+				var id = $(this).data('id');
+				var idalat = $(this).data('idalat');
+				var jumlah = $(this).data('jumlah');
+
+				if($("#cekBox"+id).is(':checked')){
+					$.ajax({
+						url: '<?php echo base_url('transaksi/Minjam/bacaPinjamAlat/'); ?>'+idalat,
+						dataType: 'json',
+						success: function(response){
+							var multiple = '';
+							if(jumlah!=1){
+								multiple = 'multiple data-max-options="'+jumlah+'"';
+							}
+
+							// $('<div class="form-group" id="divSelect'+id+'"></div>').html('<label class="col-form-label">Nama Alat:</label>'+
+							// 	'<select id="select'+id+'" class="form-control show-tick" name="selectAlatDiPinjam[]" '+multiple+'>'+
+							// 	'</select>').appendTo('#selectAlatDiPinjam');
+
+							$('<div class="form-group" id="divSelect'+id+'"></div>').html('<label class="col-form-label">Nama Alat:</label><br>'+
+								'<select id="select'+id+'" data-provide="selectpicker" name="selectAlatDiPinjam[]" '+multiple+' data-width="100%" required>'+
+								'</select>').appendTo('#selectAlatDiPinjam');
+
+							$.each(response, function(i, item){
+								$('<option value="'+item.id_alat+'|'+item.kode_alat+'">'+item.nama_alat+' | '+item.kode_alat+'</option>').appendTo('#select'+id);
+							});
+						},
+						error: function(){
+							swal('Oops...', 'Something went wrong with ajax !', 'error');
+						}
+					});
+				}else{
+					$("#divSelect"+id).remove();
+					//$("#select"+id).remove();
+				}
 			});
 
 			$(document).on('click', '#delDetail', function(e){

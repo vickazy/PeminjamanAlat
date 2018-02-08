@@ -39,6 +39,17 @@ class Minjam extends CI_Controller {
 		$this->layouts->utama('transaksi/Minjam/MinjamInsert', $data, 'transaksi/Minjam/footerMinjam');
 	}
 
+	public function tambahAcc(){
+		$result = $this->MinjamModel->tambahAcc();
+
+		$msg['success'] = false;
+		if ($result){
+			$msg['success'] = true;
+		}
+
+		echo json_encode($msg);
+	}
+
 	public function bacaDetail(){
 		$data = array(
 			'detailPinjam' => $this->MinjamModel->bacaDetailPinjam($this->MinjamModel->auto(), 'id_peminjam')->result()
@@ -48,68 +59,79 @@ class Minjam extends CI_Controller {
 		$this->load->view('transaksi/Minjam/detailPinjam', $data);
 	}
 
+	public function bacaPinjamAcc($where){
+		echo json_encode($this->MinjamModel->bacaPinjamAcc($where)->result());
+	}
+
+	public function bacaPinjamAlat($where){
+		echo json_encode($this->MinjamModel->bacaPinjamAlat($where)->result());
+	}
+
 	public function tampilData(){
 		$result = array('data' => array());
 
 		$data = $this->MinjamModel->bacaData();
 
-		foreach ($data as $key => $value){
-			$button = '<button type="button" id="lihatDataPinjam" class="btn btn-danger" data-id="'.$value['id_peminjam'].'">Acc</button>';
+		if ($data){
+			foreach ($data as $key => $value){
+				$button = '<button type="button" id="lihatDataPinjam" class="btn btn-danger" data-id="'.$value['id_peminjam'].'">Acc</button>';
 
-			$result['data'][$key] = array(
-				$value['id_peminjam'],
-				$value['nis'],
-				$value['nama_peminjam'],
-				$value['no_hp'],
-				$value['nama_keperluan'],
-				$value['nama_kelas'],
-				$value['tgl_peminjaman'],
-				$value['tgl_pengembalian_rencana'],
-				$button
-			);
-		}
-
-		echo json_encode($result);
-	}
-
-	public function inputDetail(){
-		$result1 = $this->MinjamModel->inputDetail();
-		
-
-		$msg['success'] = false;
-		
-		if ($result1) {
-			$result2 = $this->MinjamModel->kurangStok();
-			if($result1 && $result2){
-				$msg['success'] = true;
+				$result['data'][$key] = array(
+					$value['id_peminjam'],
+					$value['nis'],
+					$value['nama_peminjam'],
+					$value['no_hp'],
+					$value['nama_keperluan'],
+					$value['nama_kelas'],
+					$value['tgl_req_peminjaman'],
+					$value['tgl_peminjaman'],
+					$value['tgl_pengembalian_rencana'],
+					$button
+				);
 			}
 		}
 
-		echo json_encode($msg);
-	}
-
-	public function hapusDetail($id_detail, $id_alat, $jumlah){
-		$where = array('id_detail' => $id_detail);
-		$result1 = $this->MinjamModel->hapusDetail($where,'peminjam_detail');
-		$result2 = $this->MinjamModel->tambahStok($id_alat, $jumlah);
-
-		if ($result1 && $result2) {
-			$msg['success'] = true;
-		} else {
-			$msg['success'] = false;
-		}
-		echo json_encode($msg);
-	}
-
-	public function autoDetail(){
-		$result = $this->MinjamModel->autoDetail();
-		echo $result;
-	}
-
-	public function stokAlat(){
-		$result = $this->AlatModel->readDetail()->result();
-
 		echo json_encode($result);
 	}
+
+	// public function inputDetail(){
+	// 	$result1 = $this->MinjamModel->inputDetail();
+		
+
+	// 	$msg['success'] = false;
+		
+	// 	if ($result1) {
+	// 		$result2 = $this->MinjamModel->kurangStok();
+	// 		if($result1 && $result2){
+	// 			$msg['success'] = true;
+	// 		}
+	// 	}
+
+	// 	echo json_encode($msg);
+	// }
+
+	// public function hapusDetail($id_detail, $id_alat, $jumlah){
+	// 	$where = array('id_detail' => $id_detail);
+	// 	$result1 = $this->MinjamModel->hapusDetail($where,'peminjam_detail');
+	// 	$result2 = $this->MinjamModel->tambahStok($id_alat, $jumlah);
+
+	// 	if ($result1 && $result2) {
+	// 		$msg['success'] = true;
+	// 	} else {
+	// 		$msg['success'] = false;
+	// 	}
+	// 	echo json_encode($msg);
+	// }
+
+	// public function autoDetail(){
+	// 	$result = $this->MinjamModel->autoDetail();
+	// 	echo $result;
+	// }
+
+	// public function stokAlat(){
+	// 	$result = $this->AlatModel->readDetail()->result();
+
+	// 	echo json_encode($result);
+	// }
 
 }

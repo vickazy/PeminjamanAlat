@@ -3,10 +3,10 @@
 class MinjamModel extends CI_Model{
 
 	function bacaData(){
-		$this->db->select('peminjam.id_peminjam, peminjam.nama_peminjam, peminjam.nis, keperluan.nama_keperluan, kelas.nama_kelas, peminjam.no_hp, peminjam.tgl_peminjaman, peminjam.tgl_pengembalian_rencana, peminjam.catatan, peminjam.id_petugas, peminjam.`status`')
+		$this->db->select('peminjam.id_peminjam, peminjam.nama_peminjam, peminjam.nis, keperluan.nama_keperluan, kelas.nama_kelas, peminjam.no_hp, peminjam.tgl_req_peminjaman, peminjam.tgl_peminjaman, peminjam.tgl_pengembalian_rencana, peminjam.catatan, peminjam.id_petugas, peminjam.`status`, peminjam.`status_acc`')
 		->join('kelas', 'peminjam.id_kelas = kelas.id_kelas')
 		->join('keperluan', 'peminjam.id_keperluan = keperluan.id_keperluan');
-		$this->db->where('status', 0);
+		$this->db->where('status_acc', 0);
 		$this->db->order_by('id_peminjam', 'asc');
 		$query = $this->db->get('peminjam');
 		if($query->num_rows() > 0){
@@ -32,6 +32,23 @@ class MinjamModel extends CI_Model{
 		return $this->db->get('keperluan');
 	}
 
+	function bacaPinjamAcc($where){
+		$this->db->select('peminjam.id_peminjam, peminjam_detail.id_detail, peminjam.nama_peminjam, peminjam_detail.id_alat, alat.nama_alat, peminjam_detail.jumlah')
+		->join('peminjam_detail', 'peminjam.id_peminjam = peminjam_detail.id_peminjam')
+		->join('alat', 'peminjam_detail.id_alat = alat.id_alat');
+		$this->db->where('peminjam.id_peminjam', $where);
+		$this->db->where('peminjam_detail.`status`', 0);
+		return $this->db->get('peminjam');
+	}
+
+	function bacaPinjamAlat($where){
+		$this->db->select('alat.id_alat, alat.nama_alat, alat_detail.kode_alat, alat_detail.kondisi, alat_detail.stok')
+		->join('alat_detail', 'alat.id_alat = alat_detail.id_alat');
+		$this->db->where('alat.id_alat', $where);
+		$this->db->where_not_in('alat_detail.stok', 0);
+		return $this->db->get('alat');
+	}
+
 	function tambah(){
 		$data = array(
 			'id_peminjam'				=> $this->input->post('id_peminjam'),
@@ -48,6 +65,31 @@ class MinjamModel extends CI_Model{
 		);
 
 		return $this->db->insert('peminjam', $data);
+	}
+
+	function tambahAcc(){
+		$kode_alat = $this->input->post('selectAlatDiPinjam');
+		foreach ($kode_alat as $key => $value) {
+			$val = explode('|', $value);
+
+			$alat_detail = array('stok' => 0);
+			$this->db->where('kode_alat', $val[1]);
+			$this->db->update('alat_detail', $alat_detail);
+
+			$peminjam_detail = array('status' => 1);
+			$this->db->where('id_alat', $val[0]);
+			$this->db->where('id_peminjam', $this->input->post('id_peminjam'));
+			$this->db->update('peminjam_detail', $peminjam_detail);
+		}
+
+
+		$data = array(
+			'status_acc' => 1,
+			'id_petugas' => $this->session->userdata('id_petugas')
+		);
+
+		$this->db->where('id_peminjam', $this->input->post('id_peminjam'));
+		return $this->db->update('peminjam', $data);
 	}
 
 	function inputDetail(){

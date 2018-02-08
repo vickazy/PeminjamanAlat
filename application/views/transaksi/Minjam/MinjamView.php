@@ -27,6 +27,7 @@
 								<th>No. HP</th>
 								<th>Keperluan</th>
 								<th>Kelas</th>
+								<th>Tanggal Request</th>
 								<th>Tanggal Meminjam</th>
 								<th>Tanggal Kembali Rencana</th>
 								<th>Action</th>
@@ -40,6 +41,7 @@
 								<th>No. HP</th>
 								<th>Keperluan</th>
 								<th>Kelas</th>
+								<th>Tanggal Request</th>
 								<th>Tanggal Meminjam</th>
 								<th>Tanggal Kembali Rencana</th>
 								<th>Action</th>
@@ -53,7 +55,21 @@
 				<h4 class="card-title"><strong>Data Yang Meminjam Belum Di Kembalikan</strong></h4>
 
 				<div class="card-body">
+					<h1><img src="<?php echo base_url(); ?>assets/img/logo-lg.png" alt="logo"></h1>
 
+					<br><br><br><br><br>
+
+					<h2 class="text-uppercase text-black fs-50 d-none d-md-block">
+						<span class="fs-70 fw-900">Launching</span><br>
+						<span>very soon</span>
+						<span class="text-primary fs-70">.</span>
+					</h2>
+
+					<h2 class="text-uppercase text-black fs-30 d-md-none">
+						<span class="fs-50 fw-900">Launching</span><br>
+						<span>very soon</span>
+						<span class="text-primary fs-50">.</span>
+					</h2>
 				</div>
 			</div>
 		</div>
@@ -68,13 +84,19 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
-						<form id="myForm" action="" method="post" class="form-horizontal">
+					<form id="myForm" action="" method="post" class="form-horizontal" data-provide="validation">
+						<div class="modal-body">
 							<div class="form-group">
-								<label for="name" class="col-form-label">ID Peminjam:</label>
+								<label for="id_peminjam" class="col-form-label">ID Peminjam:</label>
 								<input type="text" name="id_peminjam" id="id_peminjam" class="form-control" readonly>
 							</div>
-							<label class="custom-control custom-checkbox">
+							<div class="form-group">
+								<label for="nama_peminjam" class="col-form-label">Nama Peminjam:</label>
+								<input type="text" name="nama_peminjam" id="nama_peminjam" class="form-control" readonly>
+							</div>
+							<div id="selectAlatDiPinjam"></div>
+							<div id="checkboxAlatDipinjam"></div>
+							<!-- <label class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input">
 								<span class="custom-control-indicator"></span>
 								<span class="custom-control-description">Unchecked</span>
@@ -83,13 +105,13 @@
 								<input type="checkbox" class="custom-control-input">
 								<span class="custom-control-indicator"></span>
 								<span class="custom-control-description">Unchecked</span>
-							</label>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>
+							</label> -->
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="btnTolak" class="btn btn-danger">Tolak</button>
+							<button type="button" name="submit" id="btnTerima" class="btn btn-success">Terima</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
