@@ -38,7 +38,7 @@
 					<div class="card-body row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<input type="text" class="form-control" id="nis" name="nis" required>
+								<input type="text" class="form-control" id="nis" name="nis" onkeyup="cekUsername();" data-error="aaa" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="15" required>
 								<label class="required" for="nis">NIS / NISN</label>
 							</div>
 
@@ -116,6 +116,28 @@
 	<script src="<?php echo base_url('assets/js/core.min.js'); ?>" data-provide="sweetalert"></script>
 	<script src="<?php echo base_url('assets/js/app.min.js'); ?>"></script>
 	<script src="<?php echo base_url('assets/js/script.min.js'); ?>"></script>
+
+	<script type="text/javascript">
+		function cekUsername() {
+			var username = document.getElementById( "nis" ).value;
+
+			if(username){
+				$.ajax({
+					type: 'post',
+					url: '<?php echo base_url("master/Siswa/cekUsername"); ?>',
+					data: {
+						username: username
+					},
+					success: function(response){
+
+					},
+					error: function(){
+						swal('Oops...', 'Something went wrong with ajax !', 'error');
+					}
+				});
+			}
+		}
+	</script>
 
 </body>
 </html>

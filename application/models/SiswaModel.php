@@ -156,6 +156,16 @@ class SiswaModel extends CI_Model {
 		return $this->db->get('keperluan');
 	}
 
+	function cekUsername(){
+		$this->db->where('nis', $this->input->post('username'));
+		$query = $this->db->get('siswa');
+		if($query->num_rows() <> 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	function kurangStok(){
 		$this->db->select('alat.stok');
 		$this->db->where('id_alat', $this->input->post('id_alat'));

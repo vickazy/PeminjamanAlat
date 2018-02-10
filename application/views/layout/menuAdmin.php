@@ -47,6 +47,12 @@
 						<i class="material-icons">#</i>
 					</a>
 				</li>
+				<li class="menu-item <?php if($this->uri->segment(2)=="Pengembalian"){echo "active";} ?>">
+					<a class="menu-link" href="<?php echo base_url('transaksi/Pengembalian'); ?>">
+						<span class="title">Pengembalian</span>
+						<i class="material-icons">#</i>
+					</a>
+				</li>
 
 				<li class="menu-category">Laporan</li>
 				<li class="menu-item">

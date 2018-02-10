@@ -9,6 +9,22 @@ class MinjamModel extends CI_Model{
 		$this->db->where('status_acc', 0);
 		$this->db->order_by('id_peminjam', 'asc');
 		$query = $this->db->get('peminjam');
+		
+		if($query->num_rows() > 0){
+			return $query->result_array();
+		}else{
+			return false;
+		}
+	}
+
+	function bacaBelumKembali(){
+		$this->db->select('peminjam.id_peminjam, peminjam.nama_peminjam, peminjam.nis, keperluan.nama_keperluan, kelas.nama_kelas, peminjam.no_hp, peminjam.tgl_req_peminjaman, peminjam.tgl_peminjaman, peminjam.tgl_pengembalian_rencana, peminjam.catatan, peminjam.id_petugas, peminjam.`status`, peminjam.`status_acc`')
+		->join('kelas', 'peminjam.id_kelas = kelas.id_kelas')
+		->join('keperluan', 'peminjam.id_keperluan = keperluan.id_keperluan');
+		$this->db->where('status', 0);
+		$this->db->order_by('id_peminjam', 'asc');
+		$query = $this->db->get('peminjam');
+		
 		if($query->num_rows() > 0){
 			return $query->result_array();
 		}else{

@@ -8,7 +8,7 @@
 			<div class="header-action">
 				<nav class="nav">
 					<a class="nav-link active" href="<?php echo base_url('transaksi/Minjam'); ?>">Lihat Data</a>
-					<a class="nav-link" href="<?php echo base_url('transaksi/Minjam/tambah'); ?>">Tambah</a>
+					<!-- <a class="nav-link" href="<?php echo base_url('transaksi/Minjam/tambah'); ?>">Tambah</a> -->
 				</nav>
 			</div>
 		</header>
@@ -55,21 +55,36 @@
 				<h4 class="card-title"><strong>Data Yang Meminjam Belum Di Kembalikan</strong></h4>
 
 				<div class="card-body">
-					<h1><img src="<?php echo base_url(); ?>assets/img/logo-lg.png" alt="logo"></h1>
-
-					<br><br><br><br><br>
-
-					<h2 class="text-uppercase text-black fs-50 d-none d-md-block">
-						<span class="fs-70 fw-900">Launching</span><br>
-						<span>very soon</span>
-						<span class="text-primary fs-70">.</span>
-					</h2>
-
-					<h2 class="text-uppercase text-black fs-30 d-md-none">
-						<span class="fs-50 fw-900">Launching</span><br>
-						<span>very soon</span>
-						<span class="text-primary fs-50">.</span>
-					</h2>
+					<table id="tampilBelumDiKembalikan" class="table table-striped table-bordered" cellspacing="0" data-provide="datatables" data-ajax="<?php echo base_url() ?>transaksi/Minjam/tampilBelumKembali">
+						<thead>
+							<tr>
+								<th>ID Peminjam</th>
+								<th>NIS</th>
+								<th>Nama Peminjam</th>
+								<th>No. HP</th>
+								<th>Keperluan</th>
+								<th>Kelas</th>
+								<th>Tanggal Request</th>
+								<th>Tanggal Meminjam</th>
+								<th>Tanggal Kembali Rencana</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>ID Peminjam</th>
+								<th>NIS</th>
+								<th>Nama Peminjam</th>
+								<th>No. HP</th>
+								<th>Keperluan</th>
+								<th>Kelas</th>
+								<th>Tanggal Request</th>
+								<th>Tanggal Meminjam</th>
+								<th>Tanggal Kembali Rencana</th>
+								<th>Action</th>
+							</tr>
+						</tfoot>
+					</table>
 				</div>
 			</div>
 		</div>

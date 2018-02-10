@@ -104,4 +104,8 @@ class Siswa extends CI_Controller {
 		echo json_encode($result);
 	}
 
+	public function cekUsername(){
+		# code...
+	}
+
 }

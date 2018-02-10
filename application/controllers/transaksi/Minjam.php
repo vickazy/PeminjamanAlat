@@ -94,6 +94,33 @@ class Minjam extends CI_Controller {
 		echo json_encode($result);
 	}
 
+	public function tampilBelumKembali(){
+		$result = array('data' => array());
+
+		$data = $this->MinjamModel->bacaBelumKembali();
+
+		if ($data){
+			foreach ($data as $key => $value){
+				$button = '<button type="button" id="lihatDataPinjam" class="btn btn-danger" data-id="'.$value['id_peminjam'].'">Lihat</button>';
+
+				$result['data'][$key] = array(
+					$value['id_peminjam'],
+					$value['nis'],
+					$value['nama_peminjam'],
+					$value['no_hp'],
+					$value['nama_keperluan'],
+					$value['nama_kelas'],
+					$value['tgl_req_peminjaman'],
+					$value['tgl_peminjaman'],
+					$value['tgl_pengembalian_rencana'],
+					$button
+				);
+			}
+		}
+
+		echo json_encode($result);
+	}
+
 	// public function inputDetail(){
 	// 	$result1 = $this->MinjamModel->inputDetail();
 		
