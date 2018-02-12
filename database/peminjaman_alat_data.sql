@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100125
 File Encoding         : 65001
 
-Date: 2018-01-25 13:03:42
+Date: 2018-02-12 14:07:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,13 +43,28 @@ CREATE TABLE `alat_detail` (
   `id_alat` varchar(20) NOT NULL,
   `kode_alat` varchar(25) NOT NULL,
   `kondisi` varchar(15) NOT NULL,
-  `status` int(11) NOT NULL,
+  `stok` int(11) NOT NULL,
   PRIMARY KEY (`kode_alat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of alat_detail
 -- ----------------------------
+INSERT INTO `alat_detail` VALUES ('ALT0003', 'AN-PP-01', 'Baik', '0');
+INSERT INTO `alat_detail` VALUES ('ALT0003', 'AN-PP-02', 'Baik', '1');
+INSERT INTO `alat_detail` VALUES ('ALT0003', 'AN-PP-03', 'Baik', '1');
+INSERT INTO `alat_detail` VALUES ('ALT0003', 'AN-PP-04', 'Baik', '1');
+INSERT INTO `alat_detail` VALUES ('ALT0003', 'AN-PP-05', 'Baik', '1');
+INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-01', 'Baik', '0');
+INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-02', 'Baik', '1');
+INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-03', 'Baik', '1');
+INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-04', 'Baik', '1');
+INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-05', 'Baik', '1');
+INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-06', 'Baik', '1');
+INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-07', 'Baik', '1');
+INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-08', 'Baik', '1');
+INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-09', 'Baik', '1');
+INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-10', 'Baik', '1');
 
 -- ----------------------------
 -- Table structure for kelas
@@ -122,7 +137,7 @@ CREATE TABLE `peminjam` (
   `tgl_pengembalian_rencana` date NOT NULL,
   `catatan` text NOT NULL,
   `id_petugas` varchar(20) NOT NULL,
-  `status` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL,
   `status_acc` int(11) NOT NULL,
   PRIMARY KEY (`id_peminjam`),
   KEY `id_keperluan` (`id_keperluan`),
@@ -135,9 +150,7 @@ CREATE TABLE `peminjam` (
 -- ----------------------------
 -- Records of peminjam
 -- ----------------------------
-INSERT INTO `peminjam` VALUES ('PJM00001', 'Jajang S', '9981895817', 'KPL001', 'KLS0005', '+62895-2002-2712', '2018-01-10', '0000-00-00', '2018-01-15', '', 'PTG0001', '0', '0');
-INSERT INTO `peminjam` VALUES ('PJM00002', 'Maman P', '987654321', 'KPL002', 'KLS0004', '+62877-7545-4695', '2018-01-10', '0000-00-00', '2018-01-12', '', 'PTG0001', '0', '0');
-INSERT INTO `peminjam` VALUES ('PJM00003', 'Ayu', '123456', 'KPL001', 'KLS0003', '+62895-2548-9661', '2018-01-29', '2018-01-24', '2018-01-31', '', '', '0', '0');
+INSERT INTO `peminjam` VALUES ('PJM00003', 'Ayu', '123456', 'KPL001', 'KLS0003', '+62895-2548-9661', '2018-01-29', '2018-01-24', '2018-01-31', '', 'PTG0001', '0', '1');
 
 -- ----------------------------
 -- Table structure for peminjam_detail
@@ -159,11 +172,8 @@ CREATE TABLE `peminjam_detail` (
 -- ----------------------------
 -- Records of peminjam_detail
 -- ----------------------------
-INSERT INTO `peminjam_detail` VALUES ('DTL000001', 'PJM00001', '', 'ALT0002', '0000-00-00', '1', '0');
-INSERT INTO `peminjam_detail` VALUES ('DTL000002', 'PJM00002', '', 'ALT0001', '0000-00-00', '1', '0');
-INSERT INTO `peminjam_detail` VALUES ('DTL000003', 'PJM00002', '', 'ALT0002', '0000-00-00', '1', '0');
-INSERT INTO `peminjam_detail` VALUES ('DTL000004', 'PJM00003', '123456', 'ALT0001', '2018-01-24', '1', '0');
-INSERT INTO `peminjam_detail` VALUES ('DTL000005', 'PJM00003', '123456', 'ALT0004', '2018-01-24', '1', '0');
+INSERT INTO `peminjam_detail` VALUES ('DTL000004', 'PJM00003', '123456', 'ALT0001', '2018-01-24', '1', '1');
+INSERT INTO `peminjam_detail` VALUES ('DTL000005', 'PJM00003', '123456', 'ALT0003', '2018-01-24', '1', '1');
 
 -- ----------------------------
 -- Table structure for pengembalian

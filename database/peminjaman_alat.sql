@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100125
 File Encoding         : 65001
 
-Date: 2018-01-25 13:03:49
+Date: 2018-02-12 14:07:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,7 +35,7 @@ CREATE TABLE `alat_detail` (
   `id_alat` varchar(20) NOT NULL,
   `kode_alat` varchar(25) NOT NULL,
   `kondisi` varchar(15) NOT NULL,
-  `status` int(11) NOT NULL,
+  `stok` int(11) NOT NULL,
   PRIMARY KEY (`kode_alat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -87,7 +87,7 @@ CREATE TABLE `peminjam` (
   `tgl_pengembalian_rencana` date NOT NULL,
   `catatan` text NOT NULL,
   `id_petugas` varchar(20) NOT NULL,
-  `status` int(11) DEFAULT NULL,
+  `status` int(11) NOT NULL,
   `status_acc` int(11) NOT NULL,
   PRIMARY KEY (`id_peminjam`),
   KEY `id_keperluan` (`id_keperluan`),
