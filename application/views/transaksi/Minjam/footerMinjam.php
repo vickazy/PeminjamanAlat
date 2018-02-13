@@ -49,6 +49,7 @@
 							$('#myModal').modal('hide');
 
 							$('#tampilData').DataTable().ajax.reload();
+							$('#tampilBelumDiKembalikan').DataTable().ajax.reload();
 						}else{
 							swal('Oops...', 'Error!', 'error');
 						}

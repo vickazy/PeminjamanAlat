@@ -10,6 +10,14 @@ class Simple_login {
 
 	// Fungsi login
 	public function login($username, $password) {
+		$cekVer = $this->CI->db->get('versi');
+		if ($cekVer->num_rows() == 1){
+			$cekV = $cekVer->row();
+
+			$this->CI->session->set_userdata('code_ver', $cekV->code_ver);
+			$this->CI->session->set_userdata('tipe_ver', $cekV->tipe);
+		}
+
 		$query = $this->CI->db->get_where('login', array('username'=>$username,'password' => md5($password)));
 		$query2 = $this->CI->db->get_where('siswa', array('nis'=>$username,'password' => md5($password)));
 		if($query->num_rows() == 1) {

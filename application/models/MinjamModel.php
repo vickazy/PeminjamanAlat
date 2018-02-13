@@ -22,6 +22,7 @@ class MinjamModel extends CI_Model{
 		->join('kelas', 'peminjam.id_kelas = kelas.id_kelas')
 		->join('keperluan', 'peminjam.id_keperluan = keperluan.id_keperluan');
 		$this->db->where('status', 0);
+		$this->db->where('status_acc', 1);
 		$this->db->order_by('id_peminjam', 'asc');
 		$query = $this->db->get('peminjam');
 		
@@ -92,7 +93,10 @@ class MinjamModel extends CI_Model{
 			$this->db->where('kode_alat', $val[1]);
 			$this->db->update('alat_detail', $alat_detail);
 
-			$peminjam_detail = array('status' => 1);
+			$peminjam_detail = array(
+				'status'	=> 1,
+				'kode_alat' => $val[1]
+			);
 			$this->db->where('id_alat', $val[0]);
 			$this->db->where('id_peminjam', $this->input->post('id_peminjam'));
 			$this->db->update('peminjam_detail', $peminjam_detail);

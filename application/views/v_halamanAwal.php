@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title><?php echo $title; ?></title>
+	<title><?php echo $title; ?> | VER.<?php echo $this->session->userdata("code_ver").' '.$this->session->userdata("tipe_ver") ?></title>
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,300i" rel="stylesheet">
