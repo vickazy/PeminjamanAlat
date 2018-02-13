@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100125
 File Encoding         : 65001
 
-Date: 2018-02-12 14:07:13
+Date: 2018-02-13 12:51:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -106,6 +106,7 @@ CREATE TABLE `peminjam_detail` (
   `id_peminjam` varchar(20) NOT NULL,
   `nis` varchar(15) NOT NULL,
   `id_alat` varchar(20) NOT NULL,
+  `kode_alat` varchar(25) NOT NULL,
   `tgl_req_peminjaman` date NOT NULL,
   `jumlah` int(11) NOT NULL,
   `status` int(11) NOT NULL,
@@ -158,4 +159,13 @@ CREATE TABLE `siswa` (
   `id_kelas` varchar(10) NOT NULL,
   `password` text NOT NULL,
   PRIMARY KEY (`nis`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for versi
+-- ----------------------------
+DROP TABLE IF EXISTS `versi`;
+CREATE TABLE `versi` (
+  `code_ver` varchar(10) NOT NULL,
+  `tipe` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

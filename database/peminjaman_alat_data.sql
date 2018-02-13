@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100125
 File Encoding         : 65001
 
-Date: 2018-02-12 14:07:03
+Date: 2018-02-13 12:50:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -161,6 +161,7 @@ CREATE TABLE `peminjam_detail` (
   `id_peminjam` varchar(20) NOT NULL,
   `nis` varchar(15) NOT NULL,
   `id_alat` varchar(20) NOT NULL,
+  `kode_alat` varchar(25) NOT NULL,
   `tgl_req_peminjaman` date NOT NULL,
   `jumlah` int(11) NOT NULL,
   `status` int(11) NOT NULL,
@@ -172,8 +173,8 @@ CREATE TABLE `peminjam_detail` (
 -- ----------------------------
 -- Records of peminjam_detail
 -- ----------------------------
-INSERT INTO `peminjam_detail` VALUES ('DTL000004', 'PJM00003', '123456', 'ALT0001', '2018-01-24', '1', '1');
-INSERT INTO `peminjam_detail` VALUES ('DTL000005', 'PJM00003', '123456', 'ALT0003', '2018-01-24', '1', '1');
+INSERT INTO `peminjam_detail` VALUES ('DTL000004', 'PJM00003', '123456', 'ALT0001', 'AN-WC-01', '2018-01-24', '1', '1');
+INSERT INTO `peminjam_detail` VALUES ('DTL000005', 'PJM00003', '123456', 'ALT0003', 'AN-PP-01', '2018-01-24', '1', '1');
 
 -- ----------------------------
 -- Table structure for pengembalian
@@ -236,3 +237,17 @@ CREATE TABLE `siswa` (
 -- Records of siswa
 -- ----------------------------
 INSERT INTO `siswa` VALUES ('123456', 'Ayu', 'Dadan', '+62895-2548-9661', 'KLS0003', 'fae38bd94701cdf2a9d114425cb40292');
+
+-- ----------------------------
+-- Table structure for versi
+-- ----------------------------
+DROP TABLE IF EXISTS `versi`;
+CREATE TABLE `versi` (
+  `code_ver` varchar(10) NOT NULL,
+  `tipe` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of versi
+-- ----------------------------
+INSERT INTO `versi` VALUES ('0.01', 'Beta');
