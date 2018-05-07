@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100125
 File Encoding         : 65001
 
-Date: 2018-02-13 12:50:52
+Date: 2018-05-07 12:49:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,7 @@ CREATE TABLE `alat` (
 -- ----------------------------
 -- Records of alat
 -- ----------------------------
-INSERT INTO `alat` VALUES ('ALT0001', 'Wacom Bamboo', '3', '10');
+INSERT INTO `alat` VALUES ('ALT0001', 'Wacom Bamboo', '9', '10');
 INSERT INTO `alat` VALUES ('ALT0002', 'Kamera DSLR', '0', '2');
 INSERT INTO `alat` VALUES ('ALT0003', 'Pulpen', '1', '5');
 INSERT INTO `alat` VALUES ('ALT0004', 'Pensil', '8', '10');
@@ -55,7 +55,7 @@ INSERT INTO `alat_detail` VALUES ('ALT0003', 'AN-PP-02', 'Baik', '1');
 INSERT INTO `alat_detail` VALUES ('ALT0003', 'AN-PP-03', 'Baik', '1');
 INSERT INTO `alat_detail` VALUES ('ALT0003', 'AN-PP-04', 'Baik', '1');
 INSERT INTO `alat_detail` VALUES ('ALT0003', 'AN-PP-05', 'Baik', '1');
-INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-01', 'Baik', '0');
+INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-01', 'Baik', '1');
 INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-02', 'Baik', '1');
 INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-03', 'Baik', '1');
 INSERT INTO `alat_detail` VALUES ('ALT0001', 'AN-WC-04', 'Baik', '1');
@@ -150,7 +150,8 @@ CREATE TABLE `peminjam` (
 -- ----------------------------
 -- Records of peminjam
 -- ----------------------------
-INSERT INTO `peminjam` VALUES ('PJM00003', 'Ayu', '123456', 'KPL001', 'KLS0003', '+62895-2548-9661', '2018-01-29', '2018-01-24', '2018-01-31', '', 'PTG0001', '0', '1');
+INSERT INTO `peminjam` VALUES ('PJM00003', 'Ayu', '123456', 'KPL001', 'KLS0003', '+62895-2548-9661', '2018-01-29', '2018-01-24', '2018-01-31', '', 'PTG0001', '1', '1');
+INSERT INTO `peminjam` VALUES ('PJM00004', 'Ayu', '123456', 'KPL001', 'KLS0003', '+62895-2548-9661', '2018-02-28', '2018-02-26', '2018-03-02', '', 'PTG0001', '0', '2');
 
 -- ----------------------------
 -- Table structure for peminjam_detail
@@ -175,6 +176,7 @@ CREATE TABLE `peminjam_detail` (
 -- ----------------------------
 INSERT INTO `peminjam_detail` VALUES ('DTL000004', 'PJM00003', '123456', 'ALT0001', 'AN-WC-01', '2018-01-24', '1', '1');
 INSERT INTO `peminjam_detail` VALUES ('DTL000005', 'PJM00003', '123456', 'ALT0003', 'AN-PP-01', '2018-01-24', '1', '1');
+INSERT INTO `peminjam_detail` VALUES ('DTL000006', 'PJM00004', '123456', 'ALT0001', '', '2018-02-26', '1', '2');
 
 -- ----------------------------
 -- Table structure for pengembalian
@@ -192,6 +194,7 @@ CREATE TABLE `pengembalian` (
 -- ----------------------------
 -- Records of pengembalian
 -- ----------------------------
+INSERT INTO `pengembalian` VALUES ('PGB00002', 'PJM00003', '2018-02-27');
 
 -- ----------------------------
 -- Table structure for petugas
@@ -250,4 +253,4 @@ CREATE TABLE `versi` (
 -- ----------------------------
 -- Records of versi
 -- ----------------------------
-INSERT INTO `versi` VALUES ('0.01', 'Beta');
+INSERT INTO `versi` VALUES ('0.10', 'Beta');

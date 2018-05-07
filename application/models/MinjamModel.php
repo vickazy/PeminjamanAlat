@@ -112,6 +112,54 @@ class MinjamModel extends CI_Model{
 		return $this->db->update('peminjam', $data);
 	}
 
+	function tolak(){
+		// $this->db->where('id_peminjam', $this->input->post('id_peminjam'));
+		// $query = $this->db->get('peminjam_detail');
+		// if ($query->num_rows() <> 0){
+		// 	foreach ($query as $key => $value){
+		// 		$id_alat = 'ALT0001';
+
+		// 		$this->db->where('id_alat', $id_alat);
+		// 		$query2 = $this->db->get('alat');
+		// 		if ($query2->num_rows() <> 0){
+		// 			$stok = $query2->row();
+		// 			$stokBaru = intval($stok->stok) + 1;
+		// 			$stokAlat = array('stok' => $stokBaru);
+		// 			$this->db->where('id_alat', $id_alat);
+		// 			$this->db->update('alat', $stokAlat);
+		// 		}
+		// 	}
+		// }
+
+		$kode_alat = $this->input->post('selectAlatDiPinjam');
+		foreach ($kode_alat as $key => $value) {
+			$val = explode('|', $value);
+
+			$this->db->where('id_alat', $val[0]);
+			$query = $this->db->get('alat');
+			if($query->num_rows() <> 0){
+				$data = $query->row();
+				$stok = intval($data->stok)+1;
+
+				$stokBaru = array('stok' => $stok);
+				$this->db->where('id_alat', $val[0]);
+				$this->db->update('alat', $stokBaru);
+			}
+		}
+
+		$data = array(
+			'status_acc' => 2,
+			'id_petugas' => $this->session->userdata('id_petugas')
+		);
+		$data2 = array('status' => 2);
+
+		$this->db->where('id_peminjam', $this->input->post('id_peminjam'));
+		$this->db->update('peminjam_detail', $data2);
+
+		$this->db->where('id_peminjam', $this->input->post('id_peminjam'));
+		return $this->db->update('peminjam', $data);
+	}
+
 	function inputDetail(){
 		$this->db->where('id_peminjam', $this->input->post('id_peminjam'));
 		$this->db->where('id_alat', $this->input->post('id_alat'));

@@ -123,7 +123,7 @@
 							</label> -->
 						</div>
 						<div class="modal-footer">
-							<button type="button" id="btnTolak" class="btn btn-danger">Tolak</button>
+							<button type="button" name="tolak" id="btnTolak" class="btn btn-danger">Tolak</button>
 							<button type="button" name="submit" id="btnTerima" class="btn btn-success">Terima</button>
 						</div>
 					</form>

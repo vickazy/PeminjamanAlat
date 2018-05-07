@@ -19,7 +19,7 @@
 
 				<div class="card-body">
 
-					<table id="" class="table table-striped table-bordered" cellspacing="0" data-provide="datatables" data-ajax="">
+					<table id="table1" class="table table-striped table-bordered" cellspacing="0" data-provide="datatables" data-ajax="<?php echo base_url() ?>transaksi/Pengembalian/tampilData">
 						<thead>
 							<tr>
 								<th>ID Peminjam</th>
@@ -45,6 +45,39 @@
 								<th>Tanggal Request</th>
 								<th>Tanggal Meminjam</th>
 								<th>Tanggal Kembali Rencana</th>
+								<th>Action</th>
+							</tr>
+						</tfoot>						
+					</table>
+
+				</div>
+			</div>
+
+			<div class="card">
+				<h4 class="card-title"><strong>Data Yang Sudah di Kembalikan</strong></h4>
+
+				<div class="card-body">
+
+					<table id="table2" class="table table-striped table-bordered" cellspacing="0" data-provide="datatables" data-ajax="<?php echo base_url() ?>transaksi/Pengembalian/tampilSudahdiKembalikan">
+						<thead>
+							<tr>
+								<th>ID Pengembalian</th>
+								<th>ID Peminjam</th>
+								<th>NIS</th>
+								<th>Nama Peminjam</th>
+								<th>Tanggal Meminjam</th>
+								<th>Tanggal Pengembalian</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>ID Pengembalian</th>
+								<th>ID Peminjam</th>
+								<th>NIS</th>
+								<th>Nama Peminjam</th>
+								<th>Tanggal Meminjam</th>
+								<th>Tanggal Pengembalian</th>
 								<th>Action</th>
 							</tr>
 						</tfoot>						

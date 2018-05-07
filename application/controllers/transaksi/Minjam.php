@@ -50,6 +50,17 @@ class Minjam extends CI_Controller {
 		echo json_encode($msg);
 	}
 
+	public function tolak(){
+		$result = $this->MinjamModel->tolak();
+
+		$msg['success'] = false;
+		if ($result){
+			$msg['success'] = true;
+		}
+
+		echo json_encode($msg);
+	}
+
 	public function bacaDetail(){
 		$data = array(
 			'detailPinjam' => $this->MinjamModel->bacaDetailPinjam($this->MinjamModel->auto(), 'id_peminjam')->result()

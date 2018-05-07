@@ -61,6 +61,32 @@
 
 			});
 
+			$('#btnTolak').click(function(){
+				var url = "<?php echo base_url('transaksi/Minjam/tolak/'); ?>";
+				var data = $('#myForm').serialize();
+
+				$.ajax({
+					type: 'ajax',
+					method: 'post',
+					url: url,
+					data: data,
+					dataType: 'json',
+					success: function(response){
+						if (response.success){
+							$('#myModal').modal('hide');
+
+							$('#tampilData').DataTable().ajax.reload();
+							$('#tampilBelumDiKembalikan').DataTable().ajax.reload();
+						}else{
+							swal('Oops...', 'Error!', 'error');
+						}
+					},
+					error: function(){
+						swal('Oops...', 'Harus Ceklis Semua Alatnya !', 'error');
+					}
+				});
+			});
+
 			$('#checkboxAlatDipinjam').on('click', 'input', function(){
 				var id = $(this).data('id');
 				var idalat = $(this).data('idalat');
